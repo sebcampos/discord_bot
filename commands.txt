@@ -1,6 +1,3 @@
-
-
-
 #turn on ssh agent
 eval "$(ssh-agent -s)"
 
@@ -9,4 +6,4 @@ ssh-add ~/.ssh/github
 
 
 #create a job to run in the backround
-nohup ./happybotv2.py > output.log &
+nohup ./happybotv2.py > logs/output.log &

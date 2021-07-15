@@ -1,3 +1,4 @@
+#!/home/linuxbrew/.linuxbrew/bin/python3
 #happybot v2
 
 #import depenedancies
@@ -33,12 +34,16 @@ async def on_ready():
             general_channel_id = channel.id
             break
 
+    await client.get_channel(general_channel_id).send("HappyBot Conneted")
     goodmorning.start(general_channel_id)
 
-@tasks.loop(minutes=30)  
+@tasks.loop(hours=1)  
 async def goodmorning(channel_id):
     channel = client.get_channel(channel_id)
-    if datetime.datetime.now().time().hour == 8 and datetime.datetime.now().time().minute in range(1,59):
+    hour = datetime.datetime.now().time().hour
+    minute = datetime.datetime.now().time().minute
+    print(hour, minute)
+    if hour == 8 and minute in range(1,59):
         await channel.send(f"Goodmorning!")
         
 

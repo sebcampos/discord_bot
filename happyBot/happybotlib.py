@@ -71,19 +71,22 @@ class WebScraper:
         opts.headless = headless
         self.driver = webdriver.Firefox(options=opts)
         self.action = ActionChains(self.driver)
-
+        print("started ws")
     def visit(self, url):
         self.driver.get(url)
         return self.driver.content
     
     def goodmorning_gif(self):
+        print("scraping")
         self.driver.get("https://giphy.com/explore/good-morning")
-        count = random.randint(1,1000)
+        count = random.randint(1,50)
+        print(count)
         for i in range(count):
             self.driver.find_element_by_xpath("/html").send_keys(Keys.ARROW_DOWN)
         time.sleep(3)
         lst = [item.get("src") for item in bs4.BeautifulSoup(self.driver.page_source, "html.parser").find_all("img") if ".gif" in item.get("src")]
         gif = random.choice(lst)
+        print("scraping done")
         return gif
     
     def quit(self):
@@ -114,7 +117,7 @@ def new_happy_bot_guild_users(guild):
         }))
     df = db.read_table(table)
     print(db.tables())
-    db.conn.close()
+    db.close_connection()
 
 def user_of_the_week_new_table():
     for i in os.listdir("../data"):
@@ -134,14 +137,15 @@ def user_of_the_week_new_table():
     db.send_table(table, df)
     print(db.tables())
     print(df)
-    db.conn.close()
+    db.close_connection()
 
 def pick_user_of_the_week(db_name, user_table):
     table = "users_of_the_week"
     db = DataBase(db_name)
     df = db.read_table(user_table)
-    df_of_week = db.read(table)
-    print(df)
-    print(df_of_week.tail(1)["date"])
+    df_of_week = db.read_table(table)
+    date = df_of_week.tail(1)["date"].item()
     user = random.choice(df.username.tolist())
-
+    db.close_connection()
+    print(date)
+    return user,date

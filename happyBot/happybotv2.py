@@ -38,7 +38,9 @@ async def on_ready():
         if channel.name == "general":
             general_channel_id["robguild"] += channel.id
             break
-    new_happy_bot_guild_users(guild, GUILD_NAME)
+    new_happy_bot_guild_users(guild_PTCB)
+    new_happy_bot_guild_users(guild_ROB)
+    user_of_the_week_new_table()
     user_of_the_week_new_table()
     #await client.get_channel(general_channel_id).send(f"HappyBot Conneted to {GUILD_NAME}")
     goodmorning.start(general_channel_id)

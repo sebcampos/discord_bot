@@ -108,7 +108,7 @@ def new_happy_bot_guild_users(guild):
     db.send_table(table, pandas.DataFrame({
         "member_id":[member.id for member in guild.members ],
         "username":[member for member in guild.members ],
-        "guild":[GUILD_NAME for member in guild.members ],
+        "guild":[guild.name for member in guild.members ],
         "hashed_password":["NaN" for member in guild.members],
         "email": ["NaN" for member in guild.members]
         }))
@@ -122,7 +122,8 @@ def user_of_the_week_new_table():
     db = DataBase(input("db_name:\n"))
     table = "users_of_the_week"
     db.build_table(table, ["date","username", "member_id"])
-    df = db.read_table(table)
+    df = db.read_table(input("users table:\n"))
+    print(df)
     user = random.choice(df.username.tolist())
     user_id = df.loc[df.username == user, "member_id"].item()
     df =  pandas.DataFrame({

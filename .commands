@@ -1,3 +1,12 @@
 
+
+
+#turn on ssh agent
+eval "$(ssh-agent -s)"
+
+#add github key
+ssh-add ~/.ssh/github
+
+
 #create a job to run in the backround
 nohup ./happybotv2.py > output.log &

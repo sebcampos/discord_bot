@@ -38,10 +38,10 @@ async def on_ready():
         if channel.name == "general":
             general_channel_id["robguild"] += channel.id
             break
-    new_happy_bot_guild_users(guild_PTCB)
-    new_happy_bot_guild_users(guild_ROB)
-    user_of_the_week_new_table()
-    user_of_the_week_new_table()
+    # new_happy_bot_guild_users(guild_PTCB)
+    # new_happy_bot_guild_users(guild_ROB)
+    # user_of_the_week_new_table()
+    # user_of_the_week_new_table()
     #await client.get_channel(general_channel_id).send(f"HappyBot Conneted to {GUILD_NAME}")
     goodmorning.start(general_channel_id)
 
@@ -65,7 +65,7 @@ async def goodmorning(channel_id):
     gif = ws.goodmorning()
     ws.quit()
     print("waiting")
-    if hour == 8 and minute in range(1,59):
+    if hour == 8 and minute in range(1,60):
         await channel_ptcb.send(f"Goodmorning!\n{gif}")
         await channel_rob.send(f"Goodmorning!\n{gif}")
         

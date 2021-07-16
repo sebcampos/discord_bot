@@ -20,30 +20,10 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 #Using the on_ready() event handler
 @client.event
 async def on_ready():
-    guild_PTCB = None
-    guild_ROB = None
-    for guild_ in client.guilds: 
-        if guild_.name == GUILD_NAME:
-            guild_PTCB = guild_
-        else:
-            guild_ROB= guild_
-    
-    general_channel_id = {"ptcb": 0, "robguild": 0}
-    for channel in guild_PTCB.channels:
-        if channel.name == "general":
-            general_channel_id["ptcb"] += channel.id
-            break
-
-    for channel in guild_ROB.channels:
-        if channel.name == "general":
-            general_channel_id["robguild"] += channel.id
-            break
-    # new_happy_bot_guild_users(guild_PTCB)
-    # new_happy_bot_guild_users(guild_ROB)
-    # user_of_the_week_new_table()
-    # user_of_the_week_new_table()
-    #await client.get_channel(general_channel_id).send(f"HappyBot Conneted to {GUILD_NAME}")
-    goodmorning.start(general_channel_id)
+    guild_dict_gc = collect_general_chat_all_guilds(client)
+    scrape_web.start()
+    goodmorning.start(guild_dict_gc)
+    new_user_of_the_week.start()
 
 
 @client.event
@@ -55,21 +35,31 @@ async def on_message(message):
 
 
 
-@tasks.loop(minutes=1)  
-async def goodmorning(channel_id):
-    hour = datetime.datetime.now().time().hour
-    minute = datetime.datetime.now().time().minute
+@tasks.loop(hours=168)
+async def new_user_of_the_week():
+    tup = pick_user_of_the_week("PTCB","PTCB_users")
+    tup2 = pick_user_of_the_week("ROB","ROB_users")
+    print(tup, tup2)
+
+
+@tasks.loop(hours=72)
+async def scrape_web():
     ws = WebScraper()
     gif = ws.goodmorning_gif()
     ws.quit()
-    tup = pick_user_of_the_week("PTCB","PTCB_users")
-    tup2 = pick_user_of_the_week("ROB","PTCB_users")
-    print(tup,tup2)
-    client.get_channel(channel_id["ptcb"]).send("test: Member of the week {tup[0]}!\nunrelated gif: {gif}")
-    #await client.get_channel(channle_id["robguild"]).send(f"test: Member of the week {tup2[0]}!\nunrelated gif: {gif}")
-    #if hour == 8 and minute in range(1,60):
-        #await channel_ptcb.send(f"Goodmorning!\n{gif}")
-        #await channel_rob.send(f"Goodmorning!\n{gif}")
+
+
+
+@tasks.loop(hour=24)  
+async def goodmorning(guild_dict_gc):
+    hour = datetime.datetime.now().time().hour
+    minute = datetime.datetime.now().time().minute
+    print("morning loop")
+    if hour == 8 and minute in range(1,60):
+        for guild,gc_channel in guild_dict_gc.items():
+            await guild.get_channel(gc_channel).send(f"Goodmorning!")
+            await guid.get_channel(gc_channel).send(file=discord.File(pick_random_goodmorning_gif()))
+
     
 
 

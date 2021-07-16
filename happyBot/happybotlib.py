@@ -2,8 +2,9 @@ import os
 import sqlite3
 import pandas
 import random
-from flask import Flask
 import datetime
+import tqdm
+import requests
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
@@ -77,17 +78,20 @@ class WebScraper:
         return self.driver.content
     
     def goodmorning_gif(self):
-        print("scraping")
+        print("scraping...")
         self.driver.get("https://giphy.com/explore/good-morning")
-        count = random.randint(1,50)
-        print(count)
+        count = random.randint(1,1000)
         for i in range(count):
             self.driver.find_element_by_xpath("/html").send_keys(Keys.ARROW_DOWN)
         time.sleep(3)
         lst = [item.get("src") for item in bs4.BeautifulSoup(self.driver.page_source, "html.parser").find_all("img") if ".gif" in item.get("src")]
-        gif = random.choice(lst)
-        print("scraping done")
-        return gif
+        print("scraping complete...")
+        print("downloading images...")
+        for i,img in enumerate(tqdm.tqdm(lst)):
+            with open(f"../data/Gifs/Goodmorning_{i}.gif","wb") as gif_file:
+                gif_file.write(requests.get(img).content)
+
+        print("Gifs saved to data/Gifs")
     
     def quit(self):
         self.driver.quit()
@@ -100,9 +104,34 @@ class User:
         self.password = hashed_password
         self.email = email
 
+class FirstSetUp:
+    def __init__(self, client):
+        self.client = client
+    def setup(self):
+        guild_dict = {guild:0 for guild in self.client.guilds}
+        for guild in guild_dict:
+            for channel in guild.channels:
+                if "general" in channel.name:
+                    guild_dict[guild] += channel.id
+                    break
+
+        for guild in guild_dict:
+            new_happy_bot_guild_users(guild)
+            user_of_the_week_new_table()
+            await client.get_channel(guild_dict[guild]).send(f"HappyBot Conneted to {guild.name} Guild")
 
 
 
+#collect general chat room for all guilds
+def collect_general_chat_all_guilds(client):
+    guild_dict = {guild:0 for guild in client.guilds}
+    for guild in guild_dict:
+        for channel in guild.channels:
+            if "general" in channel.name:
+                guild_dict[guild] += channel.id
+    return guild_dict
+
+#Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):
     db = DataBase()
     db.create_new_db(input("dbname:\n"))
@@ -119,10 +148,16 @@ def new_happy_bot_guild_users(guild):
     print(db.tables())
     db.close_connection()
 
+#Builds a sqlite3 user of the week table given an existing database
 def user_of_the_week_new_table():
-    for i in os.listdir("../data"):
-        print(i) 
-    db = DataBase(input("db_name:\n"))
+    db_list = [i for i in os.listdir("../data") if ".db" in i]
+    for db in db_list:
+        print(i)
+    response = input("db_name:\n")
+    if response not in db_list:
+        print("invalid: database does not exist:\n")
+        return             
+    db = DataBase(response)
     table = "users_of_the_week"
     db.build_table(table, ["date","username", "member_id"])
     df = db.read_table(input("users table:\n"))
@@ -139,13 +174,26 @@ def user_of_the_week_new_table():
     print(df)
     db.close_connection()
 
+#randomly selects a user of the week given a db and the users table 
 def pick_user_of_the_week(db_name, user_table):
     table = "users_of_the_week"
     db = DataBase(db_name)
-    df = db.read_table(user_table)
+    df_users = db.read_table(user_table)
     df_of_week = db.read_table(table)
-    date = df_of_week.tail(1)["date"].item()
-    user = random.choice(df.username.tolist())
+    last_date = df_of_week.tail(1)["date"].item()
+    user, user_id = random.choice(list(zip(df_users.username.tolist(),df_users.user_id.tolist())))
+    db.send_table(table, pandas.DataFrame({
+        "date":[datetime.datetime.now().date()],
+        "username":[user],
+        "member_id"[user_id]
+    }))
     db.close_connection()
-    print(date)
-    return user,date
+    return user.split("#")[0]
+
+#pick a random goodmorning gif
+def pick_random_goodmorning_gif():
+    gm_gif = random.choice([gif for gif in os.listdir("../data/Gifs") if "Goodmorning" in gif])
+    return f"../data/Gifs/{gm_gif}"
+
+
+

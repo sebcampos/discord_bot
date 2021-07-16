@@ -107,7 +107,7 @@ class User:
 class FirstSetUp:
     def __init__(self, client):
         self.client = client
-    def setup(self):
+    async def setup(self):
         guild_dict = {guild:0 for guild in self.client.guilds}
         for guild in guild_dict:
             for channel in guild.channels:

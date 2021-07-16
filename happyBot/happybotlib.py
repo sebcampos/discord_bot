@@ -100,25 +100,29 @@ class User:
 
 
 
-def new_happy_bot_guild_users(guild, GUILD_NAME):
+def new_happy_bot_guild_users(guild):
     db = DataBase()
-    db.create_new_db("PTCB")
-    db.build_table("users_PTCB", ["member_id","username", "guild", "hashed_password","email"])
-    db.send_table("users_PTCB", pandas.DataFrame({
+    db.create_new_db(input("dbname:\n"))
+    table = input("db_users_table:\n")
+    db.build_table(table, ["member_id","username", "guild", "hashed_password","email"])
+    db.send_table(table, pandas.DataFrame({
         "member_id":[member.id for member in guild.members ],
         "username":[member for member in guild.members ],
         "guild":[GUILD_NAME for member in guild.members ],
         "hashed_password":["NaN" for member in guild.members],
         "email": ["NaN" for member in guild.members]
         }))
-    df = db.read_table("users_PTCB")
+    df = db.read_table(table)
     print(db.tables())
     db.conn.close()
 
-def user_of_the_week_new_table(): 
-    db = DataBase("PTCB")
-    db.build_table("users_of_the_week_PTCB", ["date","username", "member_id"])
-    df = db.read_table("users_PTCB")
+def user_of_the_week_new_table():
+    for i in os.listdir("../data"):
+        print(i) 
+    db = DataBase(input("db_name:\n"))
+    table = "users_of_the_week"
+    db.build_table(table, ["date","username", "member_id"])
+    df = db.read_table(table)
     user = random.choice(df.username.tolist())
     user_id = df.loc[df.username == user, "member_id"].item()
     df =  pandas.DataFrame({
@@ -126,7 +130,7 @@ def user_of_the_week_new_table():
         "username":[user],
         "member_id":[user_id]
     })
-    db.send_table("users_of_the_week_PTCB", df)
+    db.send_table(table, df)
     print(db.tables())
     print(df)
     db.conn.close()

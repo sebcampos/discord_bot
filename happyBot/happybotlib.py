@@ -185,7 +185,7 @@ def pick_user_of_the_week(db_name, user_table):
     db.send_table(table, pandas.DataFrame({
         "date":[datetime.datetime.now().date()],
         "username":[user],
-        "member_id"[user_id]
+        "member_id":[user_id]
     }))
     db.close_connection()
     return user.split("#")[0]

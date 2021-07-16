@@ -57,8 +57,6 @@ async def on_message(message):
 
 @tasks.loop(minutes=1)  
 async def goodmorning(channel_id):
-    channel_ptcb = client.get_channel(channel_id["ptcb"])
-    channel_rob = client.get_channel(channel_id["robguild"])
     hour = datetime.datetime.now().time().hour
     minute = datetime.datetime.now().time().minute
     ws = WebScraper()
@@ -67,9 +65,11 @@ async def goodmorning(channel_id):
     tup = pick_user_of_the_week("PTCB","PTCB_users")
     tup2 = pick_user_of_the_week("ROB","PTCB_users")
     print(tup,tup2)
-    if hour == 8 and minute in range(1,60):
-        await channel_ptcb.send(f"Goodmorning!\n{gif}")
-        await channel_rob.send(f"Goodmorning!\n{gif}")
+    client.get_channel(channel_id["ptcb"]).send("test: Member of the week {tup[0]}!\nunrelated gif: {gif}")
+    #await client.get_channel(channle_id["robguild"]).send(f"test: Member of the week {tup2[0]}!\nunrelated gif: {gif}")
+    #if hour == 8 and minute in range(1,60):
+        #await channel_ptcb.send(f"Goodmorning!\n{gif}")
+        #await channel_rob.send(f"Goodmorning!\n{gif}")
     
 
 

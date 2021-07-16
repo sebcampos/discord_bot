@@ -451,3 +451,340 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 Exiting due to channel error.
 Exiting due to channel error.
 Exiting due to channel error.
+1626391565223	geckodriver	INFO	Listening on 127.0.0.1:44615
+1626391566277	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilecvNKsT"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626391569279	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilecvNKsT/search.json.mozlz4", (void 0)))
+1626391586328	Marionette	INFO	Listening on port 34213
+1626391587170	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626391630761	Marionette	INFO	Stopped listening on port 34213
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofilecvNKsT/protections.sqlite
+1626391636709	geckodriver	INFO	Listening on 127.0.0.1:59945
+1626391636720	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilerwpYPV"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626391639982	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilerwpYPV/search.json.mozlz4", (void 0)))
+1626391656497	Marionette	INFO	Listening on port 45413
+1626391657011	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626391701742	Marionette	INFO	Stopped listening on port 45413
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofilerwpYPV/protections.sqlite
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x390118,name=PContent::Msg_RecordDiscardedData) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x230030,name=PBrowser::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1626391712038	geckodriver	INFO	Listening on 127.0.0.1:59173
+1626391713066	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileUZrZ5g"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626391716869	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileUZrZ5g/search.json.mozlz4", (void 0)))
+1626391733117	Marionette	INFO	Listening on port 46593
+1626391733663	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626391772943	Marionette	INFO	Stopped listening on port 46593
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1626391784082	geckodriver	INFO	Listening on 127.0.0.1:50245
+1626391785108	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilepfCMzn"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626391788352	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilepfCMzn/search.json.mozlz4", (void 0)))
+1626391804934	Marionette	INFO	Listening on port 42955
+1626391805416	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626391854770	Marionette	INFO	Stopped listening on port 42955
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofilepfCMzn/protections.sqlite
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0xD,name=PAPZ::Msg_Destroy) Channel error: cannot send/recv
+
+1626391861539	geckodriver	INFO	Listening on 127.0.0.1:39121
+1626391862567	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-headless" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileQvAaD1"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626391866104	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileQvAaD1/search.json.mozlz4", (void 0)))
+1626391882363	Marionette	INFO	Listening on port 40099
+1626391883184	Marionette	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1626392320014	geckodriver	INFO	Listening on 127.0.0.1:41181
+1626392321094	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileJaZqwW"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626392324102	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileJaZqwW/search.json.mozlz4", (void 0)))
+1626392340917	Marionette	INFO	Listening on port 39093
+1626392341413	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626392369565	Marionette	INFO	Stopped listening on port 39093
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1626392375535	geckodriver	INFO	Listening on 127.0.0.1:58013
+1626392376610	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileN9Cdrx"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626392379876	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileN9Cdrx/search.json.mozlz4", (void 0)))
+1626392397479	Marionette	INFO	Listening on port 44835
+1626392398307	Marionette	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1626392570533	geckodriver	INFO	Listening on 127.0.0.1:60057
+1626392571612	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileB4yWIV"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626392574634	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileB4yWIV/search.json.mozlz4", (void 0)))
+1626392591391	Marionette	INFO	Listening on port 37471
+1626392592218	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626392672637	Marionette	INFO	Stopped listening on port 37471
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofileB4yWIV/protections.sqlite
+1626392681846	geckodriver	INFO	Listening on 127.0.0.1:48861
+1626392682922	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileMPdopP"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626392686177	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileMPdopP/search.json.mozlz4", (void 0)))
+1626392702160	Marionette	INFO	Listening on port 36749
+1626392702468	Marionette	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1626393179639	geckodriver	INFO	Listening on 127.0.0.1:44553
+1626393180713	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileMUej0t"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626393184012	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileMUej0t/search.json.mozlz4", (void 0)))
+1626393201896	Marionette	INFO	Listening on port 45237
+1626393202681	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626393255519	Marionette	INFO	Stopped listening on port 45237
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofileMUej0t/protections.sqlite
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x230030,name=PBrowser::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+1626393262790	geckodriver	INFO	Listening on 127.0.0.1:46201
+1626393263859	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilerTi9K1"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626393267433	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilerTi9K1/search.json.mozlz4", (void 0)))
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1626393348368	geckodriver	INFO	Listening on 127.0.0.1:34219
+1626393349443	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileQXeGje"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626393352472	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileQXeGje/search.json.mozlz4", (void 0)))
+1626393368718	Marionette	INFO	Listening on port 41591
+1626393368994	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626393418229	Marionette	INFO	Stopped listening on port 41591
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofileQXeGje/protections.sqlite
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x230030,name=PBrowser::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1626393424495	geckodriver	INFO	Listening on 127.0.0.1:39989
+1626393425547	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileVJko2r"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626393428278	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileVJko2r/search.json.mozlz4", (void 0)))
+1626393446134	Marionette	INFO	Listening on port 41597
+1626393446671	Marionette	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1626393573702	geckodriver	INFO	Listening on 127.0.0.1:39979
+1626393574774	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile8odmfd"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626393578064	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile8odmfd/search.json.mozlz4", (void 0)))
+1626393595365	Marionette	INFO	Listening on port 44031
+1626393595673	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626393679063	Marionette	INFO	Stopped listening on port 44031
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofile8odmfd/protections.sqlite
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1626393686386	geckodriver	INFO	Listening on 127.0.0.1:59675
+1626393687446	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileW2U885"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626393690733	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileW2U885/search.json.mozlz4", (void 0)))
+1626393708063	Marionette	INFO	Listening on port 42763
+1626393708586	Marionette	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1626393984014	geckodriver	INFO	Listening on 127.0.0.1:37229
+1626393985088	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilea7tZcF"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626393988120	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilea7tZcF/search.json.mozlz4", (void 0)))
+1626394005428	Marionette	INFO	Listening on port 40709
+1626394005727	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626394037677	Marionette	INFO	Stopped listening on port 40709
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofilea7tZcF/protections.sqlite
+1626394045763	geckodriver	INFO	Listening on 127.0.0.1:50329
+1626394046838	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileIuwQzr"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626394050355	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileIuwQzr/search.json.mozlz4", (void 0)))
+1626394066366	Marionette	INFO	Listening on port 40781
+1626394066662	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626394091579	Marionette	INFO	Stopped listening on port 40781
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofileIuwQzr/protections.sqlite
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x230030,name=PBrowser::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1626394103179	geckodriver	INFO	Listening on 127.0.0.1:33005
+1626394104259	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileaxTTQ1"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626394107257	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileaxTTQ1/search.json.mozlz4", (void 0)))
+1626394125967	Marionette	INFO	Listening on port 36279
+1626394126462	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626394187142	Marionette	INFO	Stopped listening on port 36279
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofileaxTTQ1/protections.sqlite
+1626394202852	geckodriver	INFO	Listening on 127.0.0.1:45811
+1626394203922	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofiletNmYuB"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626394207179	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofiletNmYuB/search.json.mozlz4", (void 0)))
+1626394223457	Marionette	INFO	Listening on port 45677
+1626394223984	Marionette	WARN	TLS certificate errors will be ignored for this session
+1626394260851	Marionette	INFO	Stopped listening on port 45677
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 1030: Error: Sqlite.jsm has been shutdown. Cannot open connection to: /tmp/rust_mozprofiletNmYuB/protections.sqlite
+1626394273531	geckodriver	INFO	Listening on 127.0.0.1:46631
+1626394274609	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-headless" "-headless" "-headless" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileXmKScn"
+*** You are running in headless mode.
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: glxtest: libGL.so.1 missing
+[GFX1-]: glxtest: libEGL missing
+[GFX1-]: No GPUs detected via PCI
+1626394278125	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileXmKScn/search.json.mozlz4", (void 0)))
+Exiting due to channel error.
+Exiting due to channel error.

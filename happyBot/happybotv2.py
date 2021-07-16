@@ -50,7 +50,7 @@ async def scrape_web():
 
 
 
-@tasks.loop(hour=24)  
+@tasks.loop(hours=24)  
 async def goodmorning(guild_dict_gc):
     hour = datetime.datetime.now().time().hour
     minute = datetime.datetime.now().time().minute

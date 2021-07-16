@@ -136,4 +136,12 @@ def user_of_the_week_new_table():
     print(df)
     db.conn.close()
 
+def pick_user_of_the_week(db_name, user_table):
+    table = "users_of_the_week"
+    db = DataBase(db_name)
+    df = db.read_table(user_table)
+    df_of_week = db.read(table)
+    print(df)
+    print(df_of_week.tail(1)["date"])
+    user = random.choice(df.username.tolist())
 

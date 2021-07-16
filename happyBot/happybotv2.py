@@ -64,7 +64,8 @@ async def goodmorning(channel_id):
     ws = WebScraper()
     gif = ws.goodmorning()
     ws.quit()
-    print("waiting")
+    pick_user_of_the_week("PTCB_users")
+    pick_user_of_the_week("ROB_users")
     if hour == 8 and minute in range(1,60):
         await channel_ptcb.send(f"Goodmorning!\n{gif}")
         await channel_rob.send(f"Goodmorning!\n{gif}")

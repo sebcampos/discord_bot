@@ -23,7 +23,7 @@ async def on_ready():
     guild_dict_gc = collect_general_chat_all_guilds(client)
     scrape_web.start()
     goodmorning.start(guild_dict_gc)
-    new_user_of_the_week.start()
+    new_user_of_the_week.start(guild_dict_gc)
 
 
 @client.event
@@ -36,16 +36,23 @@ async def on_message(message):
 
 
 @tasks.loop(hours=168)
-async def new_user_of_the_week():
-    tup = pick_user_of_the_week("PTCB","PTCB_users")
-    tup2 = pick_user_of_the_week("ROB","ROB_users")
-    print(tup, tup2)
+async def new_user_of_the_week(guild_dict_gc):
+    user_1 = pick_user_of_the_week("PTCB","PTCB_users")
+    user_2 = pick_user_of_the_week("ROB","ROB_users")
+    for unpack,user in list(zip(guild_dict_gc.items(),[user_1, user_2])):
+        print(unpack)
+        guild,gc_channel = unpack
+        await guild.get_channel(gc_channel).send(f"{user} is user of the week!")
+        await guild.get_channel(gc_channel).send(file=discord.File(pick_random_celebration_gif()))
 
 
 @tasks.loop(hours=72)
 async def scrape_web():
     ws = WebScraper()
-    gif = ws.goodmorning_gif()
+    print("Goodmorning Scrape")
+    ws.goodmorning_gif()
+    print("Celebration Scrape")
+    ws.celebration_gif()
     ws.quit()
 
 
@@ -58,7 +65,7 @@ async def goodmorning(guild_dict_gc):
     if hour == 8 and minute in range(1,60):
         for guild,gc_channel in guild_dict_gc.items():
             await guild.get_channel(gc_channel).send(f"Goodmorning!")
-            await guid.get_channel(gc_channel).send(file=discord.File(pick_random_goodmorning_gif()))
+            await guild.get_channel(gc_channel).send(file=discord.File(pick_random_goodmorning_gif()))
 
     
 

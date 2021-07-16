@@ -86,9 +86,25 @@ class WebScraper:
         time.sleep(3)
         lst = [item.get("src") for item in bs4.BeautifulSoup(self.driver.page_source, "html.parser").find_all("img") if ".gif" in item.get("src")]
         print("scraping complete...")
-        print("downloading images...")
+        print("downloading morning gifs...")
         for i,img in enumerate(tqdm.tqdm(lst)):
             with open(f"../data/Gifs/Goodmorning_{i}.gif","wb") as gif_file:
+                gif_file.write(requests.get(img).content)
+
+        print("Gifs saved to data/Gifs")
+    
+    def celebration_gif(self):
+        print("scraping...")
+        self.driver.get("https://giphy.com/explore/celebrate")
+        count = random.randint(1,1000)
+        for i in range(count):
+            self.driver.find_element_by_xpath("/html").send_keys(Keys.ARROW_DOWN)
+        time.sleep(3)
+        lst = [item.get("src") for item in bs4.BeautifulSoup(self.driver.page_source, "html.parser").find_all("img") if ".gif" in item.get("src")]
+        print("scraping complete...")
+        print("downloading images...")
+        for i,img in enumerate(tqdm.tqdm(lst)):
+            with open(f"../data/Gifs/Celebrate_{i}.gif","wb") as gif_file:
                 gif_file.write(requests.get(img).content)
 
         print("Gifs saved to data/Gifs")
@@ -181,7 +197,7 @@ def pick_user_of_the_week(db_name, user_table):
     df_users = db.read_table(user_table)
     df_of_week = db.read_table(table)
     last_date = df_of_week.tail(1)["date"].item()
-    user, user_id = random.choice(list(zip(df_users.username.tolist(),df_users.user_id.tolist())))
+    user, user_id = random.choice(list(zip(df_users.username.tolist(),df_users.member_id.tolist())))
     db.send_table(table, pandas.DataFrame({
         "date":[datetime.datetime.now().date()],
         "username":[user],
@@ -195,5 +211,7 @@ def pick_random_goodmorning_gif():
     gm_gif = random.choice([gif for gif in os.listdir("../data/Gifs") if "Goodmorning" in gif])
     return f"../data/Gifs/{gm_gif}"
 
-
-
+#pick a random celebration gif
+def pick_random_celebration_gif():
+    gm_gif = random.choice([gif for gif in os.listdir("../data/Gifs") if "Celebrate" in gif])
+    return f"../data/Gifs/{gm_gif}"

@@ -33,7 +33,7 @@ async def on_message(message):
     if isinstance(message.channel, discord.channel.DMChannel) and message.author != client.user:
         with open("../data/logs/happybot_feedback.txt","a") as log:
             log.write(f"\n{datetime.datetime.now()}\n{message.content}\n\n")
-        await message.channel.send(f'Suggestion added, thank yous {message.author.split("#")[0]}!')
+        await message.channel.send(f'Suggestion added, thank yous {message.author.name.split("#")[0]}!')
 
     
 

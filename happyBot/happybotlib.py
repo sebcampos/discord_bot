@@ -1,3 +1,4 @@
+#import dependancies
 import os 
 import sqlite3
 import pandas
@@ -15,16 +16,18 @@ import time
 
 
 class DataBase:
+    #build database
     def __init__(self, db_name=False):
         self.db_name = db_name
         if db_name != False and db_name in [i.replace(".db","") for i in os.listdir("../data")]:
             self.conn = sqlite3.connect(f"../data/{db_name}.db")    
         else:
             self.conn = None
-    
+    #database info
     def __repr__(self):
         return "create_new_db -> db_name\nconnect_to_db -> db_name\ntables -> self\nbuild_table -> table_name, columns\nread_table -> table_name\nsend_table -> table_name, dataframe\nclose_connection -> self"
 
+    #create a new database
     def create_new_db(self, new_db_name):
         if new_db_name in [i.replace(".db","") for i in os.listdir("../data")]:
             return "db already exists"
@@ -32,6 +35,7 @@ class DataBase:
         conn = sqlite3.connect(f'../data/{new_db_name}.db')
         self.conn = conn
     
+    #connect to existing database
     def connect_to_db(self, connect_db_name):
         db_list = [ db for db in os.listdir("../data") if ".db" in db]
         if connect_db_name in db_list:
@@ -41,43 +45,48 @@ class DataBase:
         else:
             return "db_name does not exit"
     
+    #return tables of the connected database
     def tables(self):
         cursor = self.conn.cursor()
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
         return cursor.fetchall()
 
+    #build a new table in the connected database
     def build_table(self, table_name, columns):
         pandas.DataFrame({
             column:[] for column in columns
         }).to_sql(table_name, if_exists= "fail", con = self.conn, index=False)
     
+    #return a dataframe from the requested table in the connected database
     def read_table(self, table_name):
         return pandas.read_sql(f"select * from {table_name}", con=self.conn)
     
+    #add to an existing table or completely overwrite an existing table
     def send_table(self, table_name, dataframe, overwrite=False):
         if overwrite == False:
             dataframe.astype(str).to_sql(table_name, if_exists="append", index = False, con = self.conn)
         elif overwrite == True:
             dataframe.astype(str).to_sql(table_name, if_exists="replace", index = False, con = self.conn)
 
-    
-    def update_tables():
-        pass
-    
+    #close connection to db    
     def close_connection(self):
         self.conn.close()
 
 class WebScraper:
+    #building mozilla firefox scraper
     def __init__(self, headless=True, opts= Options()):
         opts.headless = headless
         opts.add_argument('--disable-browser-side-navigation')
         self.driver = webdriver.Firefox(options=opts)
         self.action = ActionChains(self.driver)
         print("started ws")
+    
+    #visit page and return conent
     def visit(self, url):
         self.driver.get(url)
         return self.driver.content
     
+    #Scrapeing a goodmorning gif search
     def goodmorning_gif(self):
         print("scraping...")
         self.driver.get("https://giphy.com/explore/good-morning")
@@ -94,6 +103,7 @@ class WebScraper:
 
         print("Gifs saved to data/Gifs")
     
+    #Scrapeing a celebration gif search
     def celebration_gif(self):
         print("scraping...")
         self.driver.get("https://giphy.com/explore/celebrate")
@@ -109,18 +119,50 @@ class WebScraper:
                 gif_file.write(requests.get(img).content)
 
         print("Gifs saved to data/Gifs")
+
+    #Scrapeing a welcome gif search
+    def welcome_gif(self):
+        print("scraping...")
+        self.driver.get("https://giphy.com/explore/welcome")
+        count = random.randint(1,50)
+        for i in range(count):
+            self.driver.find_element_by_xpath("/html").send_keys(Keys.ARROW_DOWN)
+        time.sleep(3)
+        lst = [item.get("src") for item in bs4.BeautifulSoup(self.driver.page_source, "html.parser").find_all("img") if ".gif" in item.get("src")]
+        print("scraping complete...")
+        print("downloading images...")
+        for i,img in enumerate(tqdm.tqdm(lst)):
+            with open(f"../data/Gifs/Welcome_{i}.gif","wb") as gif_file:
+                gif_file.write(requests.get(img).content)
+
+        print("Gifs saved to data/Gifs")
     
     def quit(self):
         self.driver.quit()
 
+#adding a user
 class User:
-    def __init__(self, username, guild, hashed_password, email):
+    def __init__(self, username, user_id, guild, hashed_password, email, db):
         self.username = username
-        self.user_id
+        self.user_id = user_id
         self.guild = guild
         self.password = hashed_password
         self.email = email
+        self.db = db
+    def send_to_db(self):
+        db = DataBase(self.db)
+        db.send_table(f"{self.db}_users", pandas.DataFrame({
+            "member_id":[self.user_id],
+            "username":[self.username],
+            "guild":[self.guild],
+            "hashed_password":[self.hashed_password],
+            "email": [self.email],
+            "db_name": [self.db]
+        }))
+        db.close_connection()
 
+
+#class for happybot initial setup
 class FirstSetUp:
     def __init__(self, client):
         self.client = client
@@ -137,7 +179,9 @@ class FirstSetUp:
             user_of_the_week_new_table()
             await client.get_channel(guild_dict[guild]).send(f"HappyBot Conneted to {guild.name} Guild")
 
-
+    def create_db_and_tables():
+        #TODO: add a function to save channels of each guild to respective db and add table channels to guild
+        pass
 
 #collect general chat room for all guilds
 def collect_general_chat_all_guilds(client):
@@ -151,15 +195,17 @@ def collect_general_chat_all_guilds(client):
 #Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):
     db = DataBase()
-    db.create_new_db(input("dbname:\n"))
+    db_name = input("dbname:\n")
+    db.create_new_db()
     table = input("db_users_table:\n")
     db.build_table(table, ["member_id","username", "guild", "hashed_password","email"])
     db.send_table(table, pandas.DataFrame({
         "member_id":[member.id for member in guild.members ],
-        "username":[member for member in guild.members ],
+        "username":[member.name for member in guild.members ],
         "guild":[guild.name for member in guild.members ],
         "hashed_password":["NaN" for member in guild.members],
-        "email": ["NaN" for member in guild.members]
+        "email": ["NaN" for member in guild.members],
+        "db_name": [db_name for member in guild.members]
         }))
     df = db.read_table(table)
     print(db.tables())
@@ -215,4 +261,9 @@ def pick_random_goodmorning_gif():
 #pick a random celebration gif
 def pick_random_celebration_gif():
     gm_gif = random.choice([gif for gif in os.listdir("../data/Gifs") if "Celebrate" in gif])
+    return f"../data/Gifs/{gm_gif}"
+
+#pick a random celebration gif
+def pick_random_welcome_gif():
+    gm_gif = random.choice([gif for gif in os.listdir("../data/Gifs") if "Welcome" in gif])
     return f"../data/Gifs/{gm_gif}"

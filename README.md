@@ -11,5 +11,6 @@ so far happybot:
 - Sends a good morning message to all servers in the general text channel
 
 
-next step:
-Have Happybot play music in one of the voicechannels
+next steps:
+- Have Happybot play music in one of the voicechannels
+- create flask app related to Happybot

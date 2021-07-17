@@ -70,6 +70,7 @@ class DataBase:
 class WebScraper:
     def __init__(self, headless=True, opts= Options()):
         opts.headless = headless
+        opts.add_argument('--disable-browser-side-navigation')
         self.driver = webdriver.Firefox(options=opts)
         self.action = ActionChains(self.driver)
         print("started ws")
@@ -80,7 +81,7 @@ class WebScraper:
     def goodmorning_gif(self):
         print("scraping...")
         self.driver.get("https://giphy.com/explore/good-morning")
-        count = random.randint(1,1000)
+        count = random.randint(1,50)
         for i in range(count):
             self.driver.find_element_by_xpath("/html").send_keys(Keys.ARROW_DOWN)
         time.sleep(3)
@@ -96,7 +97,7 @@ class WebScraper:
     def celebration_gif(self):
         print("scraping...")
         self.driver.get("https://giphy.com/explore/celebrate")
-        count = random.randint(1,1000)
+        count = random.randint(1,50)
         for i in range(count):
             self.driver.find_element_by_xpath("/html").send_keys(Keys.ARROW_DOWN)
         time.sleep(3)

@@ -251,7 +251,7 @@ def pick_user_of_the_week(db_name, user_table):
         "member_id":[user_id]
     }))
     db.close_connection()
-    return user.split("#")[0]
+    return user.split("#")[0], user_id
 
 #pick a random goodmorning gif
 def pick_random_goodmorning_gif():

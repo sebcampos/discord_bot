@@ -1,4 +1,5 @@
 #!/home/linuxbrew/.linuxbrew/bin/python3
+
 #happybot v2
 
 #import depenedancies
@@ -23,7 +24,7 @@ async def on_ready():
     guild_dict_gc = collect_general_chat_all_guilds(client)
     scrape_web.start()
     goodmorning.start(guild_dict_gc)
-    #new_user_of_the_week.start(guild_dict_gc)
+    new_user_of_the_week.start(guild_dict_gc)
 
 
 #when DM'd happybot logs the suggestion
@@ -51,15 +52,18 @@ async def on_member_join(member):
 
 
 #choses a user of the week
-# @tasks.loop(hours=1)
-# async def new_user_of_the_week(guild_dict_gc):
-#     user_1 = pick_user_of_the_week("PTCB","PTCB_users")
-#     user_2 = pick_user_of_the_week("ROB","ROB_users")
-#     for unpack,user in list(zip(guild_dict_gc.items(),[user_1, user_2])):
-#         print(unpack)
-#         guild,gc_channel = unpack
-#         await guild.get_channel(gc_channel).send(f"{user} is user of the week!")
-#         await guild.get_channel(gc_channel).send(file=discord.File(pick_random_celebration_gif()))
+@tasks.loop(hours=168)
+async def new_user_of_the_week(guild_dict_gc):
+    user_1, user_1_id = pick_user_of_the_week("PTCB","PTCB_users")
+    user_2, user_2_id = pick_user_of_the_week("ROB","ROB_users")
+    for user,user_id in [(user_1,user_1_id), (user_2,user_2_id)]:
+        user = await client.get_user_info(user_id)
+        await client.send_message(user, "You are User of the week for week {datetime.datetime.now().date()}!\n\nThis entitles you to bragging rights :)")
+    for unpack,user in list(zip(guild_dict_gc.items(),[user_1, user_2])):
+        print(unpack)
+        guild,gc_channel = unpack
+        await guild.get_channel(gc_channel).send(f"{user} is user of the week!")
+        await guild.get_channel(gc_channel).send(file=discord.File(pick_random_celebration_gif()))
 
 
 #scrapes gifs every 3 days
@@ -76,12 +80,12 @@ async def scrape_web():
 
 
 #sends a goodmorning and gif to the general channel
-@tasks.loop(hours=1)  
+@tasks.loop(hours=24)  
 async def goodmorning(guild_dict_gc):
     hour = datetime.datetime.now().time().hour
     minute = datetime.datetime.now().time().minute
     print("morning loop")
-    if hour == 8 and minute in range(1,60):
+    if hour == 6 and minute in range(1,60):
         for guild,gc_channel in guild_dict_gc.items():
             await guild.get_channel(gc_channel).send(f"Goodmorning!")
             await guild.get_channel(gc_channel).send(file=discord.File(pick_random_goodmorning_gif()))

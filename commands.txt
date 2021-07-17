@@ -11,3 +11,7 @@ nohup ./happybotv2.py > logs/output.log &
 
 #find pid of happybot
 ps ax | grep happybotv2.py
+
+
+#change the time of the linux vm
+sudo date +%T -s "01:49:00"

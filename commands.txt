@@ -7,3 +7,7 @@ ssh-add ~/.ssh/github
 
 #create a job to run in the backround
 nohup ./happybotv2.py > logs/output.log &
+
+
+#find pid of happybot
+ps ax | grep happybotv2.py

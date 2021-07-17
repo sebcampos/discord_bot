@@ -65,15 +65,14 @@ async def on_member_join(member):
 #scrapes gifs every 3 days
 @tasks.loop(hours=72)
 async def scrape_web():
-    if hour == 8 and minute in range(1,60):
-        ws = WebScraper()
-        print("Goodmorning Scrape")
-        ws.goodmorning_gif()
-        print("Celebration Scrape")
-        ws.celebration_gif()
-        print("Welcome Scrape")
-        ws.welcome_gif()
-        ws.quit()
+    ws = WebScraper()
+    print("Goodmorning Scrape")
+    ws.goodmorning_gif()
+    print("Celebration Scrape")
+    ws.celebration_gif()
+    print("Welcome Scrape")
+    ws.welcome_gif()
+    ws.quit()
 
 
 #sends a goodmorning and gif to the general channel

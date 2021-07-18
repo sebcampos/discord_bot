@@ -54,11 +54,15 @@ async def on_member_join(member):
 #choses a user of the week
 @tasks.loop(hours=168)
 async def new_user_of_the_week(guild_dict_gc):
-    user_1, user_1_id = pick_user_of_the_week("PTCB","PTCB_users")
-    user_2, user_2_id = pick_user_of_the_week("ROB","ROB_users")
-    for user,user_id in [(user_1,user_1_id), (user_2,user_2_id)]:
-        user = await client.get_user_info(user_id)
-        await client.send_message(user, "You are User of the week for week {datetime.datetime.now().date()}!\n\nThis entitles you to bragging rights :)")
+    user_1 = pick_user_of_the_week("PTCB","PTCB_users")
+    user_2 = pick_user_of_the_week("ROB","ROB_users")
+    for user in [user_1, user_2]:
+        for guild in client.guilds:
+            for member in guild.members:
+                if member.name == user:
+                    user = await client.get_user_info(member.id)
+                    await client.send_message(user, "You are User of the week for week {datetime.datetime.now().date()}!\n\nThis entitles you to bragging rights :)")
+    
     for unpack,user in list(zip(guild_dict_gc.items(),[user_1, user_2])):
         print(unpack)
         guild,gc_channel = unpack

@@ -244,14 +244,14 @@ def pick_user_of_the_week(db_name, user_table):
     df_users = db.read_table(user_table)
     df_of_week = db.read_table(table)
     last_date = df_of_week.tail(1)["date"].item()
-    user, user_id = random.choice(list(zip(df_users.username.tolist(),df_users.member_id.tolist())))
+    user = random.choice(df_users.username.tolist())
     db.send_table(table, pandas.DataFrame({
         "date":[datetime.datetime.now().date()],
         "username":[user],
         "member_id":[user_id]
     }))
     db.close_connection()
-    return user.split("#")[0], user_id
+    return user
 
 #pick a random goodmorning gif
 def pick_random_goodmorning_gif():

@@ -149,6 +149,17 @@ class User:
         self.password = hashed_password
         self.email = email
         self.db = db
+    
+    def __repr__(self):
+        return f"""
+        {self.username}
+        {self.user_id}
+        {self.guild}
+        {self.password}
+        {self.email = email}
+        {self.db = db}
+        """
+    
     def send_to_db(self):
         db = DataBase(self.db)
         db.send_table(f"{self.db}_users", pandas.DataFrame({

@@ -44,6 +44,7 @@ async def on_member_join(member):
     await member.send(f'Welcome {member.name.split("#")[0]}\n(message me suggestions please!)')
     await member.send(file=discord.File(pick_random_welcome_gif()))
     user = User(member.name, member.id, member.guild, "NaN","NaN","NaN")
+    print(user)
     with open("../data/logs/new_member.log","a") as new_members:
         new_members.write(f"{user.username}, {user.user_id}, {user.guild}\n")
 

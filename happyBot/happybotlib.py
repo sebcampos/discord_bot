@@ -151,14 +151,8 @@ class User:
         self.db = db
     
     def __repr__(self):
-        return f"""
-        {self.username}
-        {self.user_id}
-        {self.guild}
-        {self.password}
-        {self.email = email}
-        {self.db = db}
-        """
+        string = f"{self.username}\n{self.user_id}\n{self.guild}\n{self.password}\n{self.email}\n{self.db}"
+        return string
     
     def send_to_db(self):
         db = DataBase(self.db)

@@ -66,7 +66,7 @@ async def new_user_of_the_week(guild_dict_gc):
     for unpack,user in list(zip(guild_dict_gc.items(),[user_1, user_2])):
         print(unpack)
         guild,gc_channel = unpack
-        await guild.get_channel(gc_channel).send(f"{user} is user of the week!")
+        await guild.get_channel(gc_channel).send(f"{user.split("#")[0]} is user of the week!")
         await guild.get_channel(gc_channel).send(file=discord.File(pick_random_celebration_gif()))
 
 

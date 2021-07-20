@@ -61,8 +61,9 @@ async def new_user_of_the_week(guild_dict_gc):
         for guild in client.guilds:
             for member in guild.members:
                 if member.name == user:
-                    user = await client.get_user_info(member.id)
-                    await client.send_message(user, f"You are User of the week for week {datetime.datetime.now().date()}!\n\nThis entitles you to bragging rights :)")
+                    channel = await member.create_dm()
+                    await channel.send(f"You are User of the week for week {datetime.datetime.now().date()}!\n\nThis entitles you to bragging rights :)")
+                    
     
     for unpack,user in list(zip(guild_dict_gc.items(),[user_1, user_2])):
         print(unpack)

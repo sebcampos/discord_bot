@@ -84,7 +84,7 @@ class WebScraper:
     #visit page and return conent
     def visit(self, url):
         self.driver.get(url)
-        return self.driver.content
+        return self.driver.page_source
     
     #Scrapeing a goodmorning gif search
     def goodmorning_gif(self):

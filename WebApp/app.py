@@ -14,13 +14,13 @@ def root():
 @app.route('/post_me', methods=["GET","POST"])
 def setup():
     if request.method == "POST" or request.method == "GET":
-        print(request)
-        print(request.content)
-    return "<h1>Testing</h1>"
+        print(request.url)
+    return response.content
 
 
 if __name__ == "__main__":
-   app.run(host="0.0.0.0", port=80)
+    app.run(ssl_context='adhoc' ,host="0.0.0.0", port=443)
+
 
     
 

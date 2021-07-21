@@ -1,8 +1,8 @@
 import requests
 from config import CLIENT_ID, CLIENT_SECRET
-redirect_uri = "34.102.16.154"
+redirect_uri = "34.102.16.154/post_me"
 
-class ShopifyClient:
+class SpotifyClient:
     def __init__(self, CLIENT_ID=CLIENT_ID, CLIENT_SECRET=CLIENT_SECRET):
         self.client_id = CLIENT_ID
         self.client_secret = CLIENT_SECRET

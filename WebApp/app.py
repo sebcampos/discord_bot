@@ -15,6 +15,7 @@ def root():
 def setup():
     if request.method == "POST" or request.method == "GET":
         print(request)
+        print(request.content)
     return "<h1>Testing</h1>"
 
 

@@ -18,8 +18,8 @@ def setup():
         code = sc.return_code(request.url)
         payload = sc.authorize(code)
         access_token = payload["access_token"]
-        sc.search_api(token=access_token, query="gorillaz")
-    return render_template("templates/Welcome.html")
+        data = sc.search_api(token=access_token, query="gorillaz")
+    return render_template("Welcome.html", data=data)
 
 
 if __name__ == "__main__":

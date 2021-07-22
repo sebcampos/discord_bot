@@ -20,8 +20,15 @@ def setup():
         payload = sc.authorize(code)
         access_token = payload["access_token"]
         data = sc.search_api(token=access_token, query="gorillaz")
-        json.dump(data, "../data/json_data/data.js")
+        with open("../data/json_data/data.js","w") as outfile:
+            json.dump(data, outfile)
     return render_template("Welcome.html", data=data)
+
+
+#data
+@app.route("/json_data")
+def json_endpoint():
+    return send_from_directory("../data/json_data","data.js")
 
 
 if __name__ == "__main__":

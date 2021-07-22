@@ -3,27 +3,26 @@ from flask import Flask, redirect, url_for, request, render_template, send_from_
 from SpotifyClient import SpotifyClient
 
 app = Flask(__name__)
-
+sc = SpotifyClient()
 
 #redirect to spotify
 @app.route("/", methods=["GET"])
 def root():
-    sc = SpotifyClient()
-    redirect_link = sc.authorize()
+    redirect_link = sc.build_url()
     return redirect(redirect_link)
 
 #awaiting token
 @app.route('/post_me', methods=["GET","POST"])
 def setup():
-    if request.method == "POST" or request.method == "GET":
-        print(request.url)
+    if request.method == "GET":
+        code = sc.return_code(request.url)
+        payload = sc.authorize(code)
     
     return "success"
 
 
 if __name__ == "__main__":
-    app.run(ssl_context=("certs/cert.pem", "certs/key.pem") ,host="0.0.0.0", port=443)
-
+    app.run(ssl_context=('certs/cert.pem', 'certs/key.pem'), host="0.0.0.0", port=443)
 
     
 

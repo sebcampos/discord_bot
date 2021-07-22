@@ -6,4 +6,5 @@ happyBot/geckodriver.log
 data/*
 geckodriver.log
 WebApp/config.py
+WebApp/__pycahce__
 

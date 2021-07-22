@@ -52,12 +52,12 @@ class SpotifyClient:
         return payload
     
     #query the search api
-    def search_api(token, query, type_list=["album", "artist", "playlist", "track", "show", "episode"], market="from_token",include_external="audio"):
+    def search_api(self, token, query, type_list=["album", "artist", "playlist", "track", "show", "episode"], market="from_token",include_external="audio"):
         #https://developer.spotify.com/documentation/web-api/reference/#category-search
         #type is a comma seperated list of types to search from - album , artist, playlist, track, show and episode.
         type_string = ",".join(type_list)
         response = requests.get(
-            f"https://api.spotify.com/v1/search?q={query}&type={type_string}&market={market}&include_external={include_external}}",
+            f"https://api.spotify.com/v1/search?q={query}&type={type_string}&market={market}&include_external={include_external}",
             headers = {
                 "Authorization":token
             }

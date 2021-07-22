@@ -13,7 +13,7 @@ class SpotifyClient:
     
     #build authorization url
     def build_url(self):
-        url =f"https://accounts.spotify.com/authorize?client_id={self.client_id}&response_type=code&redirect_uri={redirect_uri}&scope=ugc-image-upload%20user-read-recently-played%20user-top-read%20user-read-playback-position%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20app-remote-control%20streaming%20playlist-modify-public%20playlist-modify-private%20playlist-read-private%20playlist-read-collaborative%20user-follow-modify%20user-follow-read%20user-library-modify%20user-library-read"    
+        url =f"https://accounts.spotify.com/authorize?client_id={self.client_id}&response_type=code&redirect_uri={redirect_uri}&scope=ugc-image-upload%20user-read-recently-played%20user-top-read%20user-read-playback-position%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20app-remote-control%20streaming%20playlist-modify-public%20playlist-modify-private%20playlist-read-private%20playlist-read-collaborative%20user-follow-modify%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email%20user-read-private"    
         return url
     
     #collect code paramater from url
@@ -56,6 +56,7 @@ class SpotifyClient:
         #https://developer.spotify.com/documentation/web-api/reference/#category-search
         #type is a comma seperated list of types to search from - album , artist, playlist, track, show and episode.
         type_string = ",".join(type_list)
+        query = query.replace(" ","%20")
         response = requests.get(
             f"https://api.spotify.com/v1/search?q={query}&type={type_string}&market={market}&include_external={include_external}",
             headers = {

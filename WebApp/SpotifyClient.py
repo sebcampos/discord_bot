@@ -45,10 +45,12 @@ class SpotifyClient:
         response = requests.post(
             "https://accounts.spotify.com/api/token",
             #headers require base64 encoding
-            headers = {
-                "Authorization": f"Basic {paramater}"
-            },
+            # headers = {
+            #     "Authorization": f"Basic {paramater}"
+            # },
             data = {
+                "client_id": CLIENT_ID,
+                "client_secret":CLIENT_SECRET,
                 "grant_type":"refresh_token",
                 "refresh_token":payload["refresh_token"]
             }

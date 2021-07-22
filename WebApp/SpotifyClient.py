@@ -7,7 +7,7 @@ import pprint
 redirect_uri = "https://34.102.16.154/post_me"
 encoded_client_id = base64.b64encode(CLIENT_ID.encode("ascii")).decode("ascii")
 encoded_client_secret = base64.b64encode(CLIENT_ID.encode("ascii")).decode("ascii")
-paramater = base64.b64encode((CLIENT_ID + ":" +CLIENT_ID).encode("ascii")).decode("ascii")
+paramater = base64.b64encode((CLIENT_ID+CLIENT_ID).encode("ascii")).decode("ascii")
 
 class SpotifyClient:
     #build client

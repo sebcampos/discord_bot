@@ -17,6 +17,7 @@ def setup():
     if request.method == "GET":
         code = sc.return_code(request.url)
         payload = sc.authorize(code)
+        refresh = sc.refresh_token(payload)
     
     return "success"
 

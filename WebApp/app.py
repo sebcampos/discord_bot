@@ -19,7 +19,7 @@ def setup():
         payload = sc.authorize(code)
         access_token = payload["access_token"]
         sc.search_api(token=access_token, query="gorillaz")
-    return "success"
+    return render_template("templates/Welcome.html")
 
 
 if __name__ == "__main__":

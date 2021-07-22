@@ -64,5 +64,4 @@ class SpotifyClient:
             }
         )
         payload = response.json()
-        pprint.pprint(payload)
         return payload

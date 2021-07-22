@@ -1,6 +1,6 @@
 #!/home/linuxbrew/.linuxbrew/bin/python3
 from flask import Flask, redirect, url_for, request, render_template, send_from_directory
-
+from SpotifyClient import SpotifyClient
 
 app = Flask(__name__)
 

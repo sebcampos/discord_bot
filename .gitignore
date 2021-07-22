@@ -5,4 +5,5 @@ happyBot/__pycache__
 happyBot/geckodriver.log
 data/*
 geckodriver.log
+WebApp/config.py
 

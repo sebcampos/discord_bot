@@ -17,8 +17,8 @@ def setup():
     if request.method == "GET":
         code = sc.return_code(request.url)
         payload = sc.authorize(code)
-        refresh = sc.refresh_token(payload)
-    
+        access_token = payload["access_token"]
+        sc.search_api(token=access_token, query="gorillaz")
     return "success"
 
 

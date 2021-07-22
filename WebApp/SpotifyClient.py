@@ -1,13 +1,9 @@
 import requests
 from config import CLIENT_ID, CLIENT_SECRET
-import base64
 import re
 import pprint
 
 redirect_uri = "https://34.102.16.154/post_me"
-encoded_client_id = base64.b64encode(CLIENT_ID.encode("ascii")).decode("ascii")
-encoded_client_secret = base64.b64encode(CLIENT_ID.encode("ascii")).decode("ascii")
-paramater = base64.b64encode((CLIENT_ID+CLIENT_ID).encode("ascii")).decode("ascii")
 
 class SpotifyClient:
     #build client
@@ -44,15 +40,26 @@ class SpotifyClient:
     def refresh_token(self, payload):
         response = requests.post(
             "https://accounts.spotify.com/api/token",
-            #headers require base64 encoding
-            # headers = {
-            #     "Authorization": f"Basic {paramater}"
-            # },
             data = {
                 "client_id": CLIENT_ID,
                 "client_secret":CLIENT_SECRET,
                 "grant_type":"refresh_token",
                 "refresh_token":payload["refresh_token"]
+            }
+        )
+        payload = response.json()
+        pprint.pprint(payload)
+        return payload
+    
+    #query the search api
+    def search_api(token, query, type_list=["album", "artist", "playlist", "track", "show", "episode"], market="from_token",include_external="audio"):
+        #https://developer.spotify.com/documentation/web-api/reference/#category-search
+        #type is a comma seperated list of types to search from - album , artist, playlist, track, show and episode.
+        type_string = ",".join(type_list)
+        response = requests.get(
+            f"https://api.spotify.com/v1/search?q={query}&type={type_string}&market={market}&include_external={include_external}}",
+            headers = {
+                "Authorization":token
             }
         )
         payload = response.json()

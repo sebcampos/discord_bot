@@ -1,6 +1,7 @@
 #!/home/linuxbrew/.linuxbrew/bin/python3
 from flask import Flask, redirect, url_for, request, render_template, send_from_directory
 from SpotifyClient import SpotifyClient
+import json
 
 app = Flask(__name__)
 sc = SpotifyClient()
@@ -19,6 +20,7 @@ def setup():
         payload = sc.authorize(code)
         access_token = payload["access_token"]
         data = sc.search_api(token=access_token, query="gorillaz")
+        json.dump(data, "../data/json_data/data.js")
     return render_template("Welcome.html", data=data)
 
 

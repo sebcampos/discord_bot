@@ -3,50 +3,50 @@ console.log("Working");
 var list_elements = document.getElementById("data-list");
 
 
-  window.onSpotifyWebPlaybackSDKReady = () => {
+window.onSpotifyWebPlaybackSDKReady = () => {
 
-    // Define the Spotify Connect device, getOAuthToken has an actual token 
-    // hardcoded for the sake of simplicity
-    var player = new Spotify.Player({
-      name: 'A Spotify Web SDK Player',
-      getOAuthToken: callback => {
-        callback("BQDQBeHtIYNf-vVHrKlZJf0RJMFHUkMS0Qa_DwUR4VKKc1Q6fEEp3rGHOsaGJlyxXJxd__5ssVN4dI8YpN0-SLNDAlxTReRShjRp5KMs8XN3jB99LzPcvinQZEcHNb38jFZJggTm8oW1mOsYoUT39a60EFj7crl3EhQ");
-      },
-      volume: 0.1
-    });
+  // Define the Spotify Connect device, getOAuthToken has an actual token 
+  // hardcoded for the sake of simplicity
+  var player = new Spotify.Player({
+    name: 'A Spotify Web SDK Player',
+    getOAuthToken: callback => {
+      callback(token);
+    },
+    volume: 0.1
+  });
 
-    // Called when connected to the player created beforehand successfully
-    player.addListener('ready', ({ device_id }) => {
-      console.log('Ready with Device ID', device_id);
+  // Called when connected to the player created beforehand successfully
+  player.addListener('ready', ({ device_id }) => {
+    console.log('Ready with Device ID', device_id);
 
-      const play = ({
-        spotify_uri,
-        playerInstance: {
-          _options: {
-            getOAuthToken,
-            id
-          }
+    const play = ({
+      spotify_uri,
+      playerInstance: {
+        _options: {
+          getOAuthToken,
+          id
         }
-      }) => {
-        getOAuthToken(access_token => {
-          fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
-            method: 'PUT',
-            body: JSON.stringify({ uris: [spotify_uri] }),
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${access_token}`
-            },
-          });
+      }
+    }) => {
+      getOAuthToken(access_token => {
+        fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+          method: 'PUT',
+          body: JSON.stringify({ uris: [spotify_uri] }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${access_token}`
+          },
         });
-      };
-
-      play({
-        playerInstance: player,
-        spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
       });
-    });
+    };
 
-    // Connect to the player created beforehand, this is equivalent to 
-    // creating a new device which will be visible for Spotify Connect
-    player.connect();
-  };
+    play({
+      playerInstance: player,
+      spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+    });
+  });
+
+  // Connect to the player created beforehand, this is equivalent to 
+  // creating a new device which will be visible for Spotify Connect
+  player.connect();
+};

@@ -12,14 +12,14 @@ def root():
     return redirect(redirect_link)
 
 #awaiting token
-@app.route('/hompage', methods=["GET","POST"])
+@app.route('/homepage', methods=["GET","POST"])
 def setup():
     if request.method == "GET":
         code = sc.return_code(request.url)
         payload = sc.authorize(code)
         access_token = payload["access_token"]
         data = sc.search_api(token=access_token, query="gorillaz")
-    return render_template("Welcome.html", data=data)
+    return render_template("Welcome.html", data=data, token=access_token)
 
 
 if __name__ == "__main__":

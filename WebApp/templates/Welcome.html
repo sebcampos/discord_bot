@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script> var token = '{{ token }}';</script>
     <script src="../static/js/script.js"></script>
     <title>HappyBot</title>
 </head>
@@ -15,9 +16,19 @@
     <div>
         <ul id="data-list">
             {% for key in data.keys() %}
-            <li>{{key}}</li>>
+	    <li>{{ key  }}</li>
+	    	{% for item in data[key] %}
+	    	<p> {{ item }} </p>
+			{% if data[key][item] is iterable and  data[key][item] is not string %}
+				{% for list_item in data[key][item] %}
+					<li>{{ list_item }}</li>
+				{% endfor %}
+			{% else %}
+				{{ data[key][item] }}
+			{% endif %}
+	    	{% endfor %}
             {% endfor %}
-        </ul>
+	</ul>
     </div>    
 </body>
 </html>

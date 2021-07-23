@@ -3,7 +3,7 @@ from config import CLIENT_ID, CLIENT_SECRET
 import re
 import pprint
 
-redirect_uri = "https://34.102.16.154/hompage"
+redirect_uri = "https://34.102.16.154/homepage"
 
 class SpotifyClient:
     #build client

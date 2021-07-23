@@ -78,7 +78,7 @@ class SpotifyClient:
         return payload
     
     #start or resume playback
-    def start_player(self, token, context_uri):
+    def play_track(self, token, context_uri):
         response = requests.put(
             f'https://api.spotify.com/v1/me/player/play',
             json = {

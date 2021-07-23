@@ -76,3 +76,26 @@ class SpotifyClient:
         )
         payload = response.json()
         return payload
+    
+    #start or resume playback
+    def start_player(self, token, context_uri):
+        response = requests.put(
+            f'https://api.spotify.com/v1/me/player/play',
+            json = {
+                "uris":[context_uri]
+            },
+            headers = {
+                "Authorization":f"Bearer {token}"
+                }
+        )
+        
+        return response
+    #get current user data
+    def get_current_user_data(self, token):
+        response = requests.get(
+            "https://api.spotify.com/v1/me/player",
+            headers = {
+                "Authorization":f"Bearer {token}"
+            }
+        )
+        return response.json()

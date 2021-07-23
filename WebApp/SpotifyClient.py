@@ -65,3 +65,14 @@ class SpotifyClient:
         )
         payload = response.json()
         return payload
+
+    #get available devices
+    def available_devices(self, token):
+        response = requests.get(
+                'https://api.spotify.com/v1/me/player/devices',
+                headers = {
+                    "Authorization":f"Bearer {token}"
+                    }
+        )
+        payload = response.json()
+        return payload

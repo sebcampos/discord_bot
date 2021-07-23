@@ -19,6 +19,7 @@ def setup():
         payload = sc.authorize(code)
         access_token = payload["access_token"]
         data = sc.search_api(token=access_token, query="gorillaz")
+        devices = sc.available_devices(token=access_token)
     return render_template("Welcome.html", data=data, token=access_token)
 
 

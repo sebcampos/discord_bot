@@ -236,8 +236,28 @@ def collect_general_voice_channels(client):
                 guild_dict[guild] += channel.id
                 print(channel)
                 print(type(channel))
+    
     return guild_dict
 
+
+def start_music_player_connections(client):
+    vc_client_list = []
+    #connect to music channel
+    general_voice_channels = collect_general_voice_channels(client)
+    for guild,gc_channel in general_voice_channels.items(): 
+        vc = await client.get_channel(gc_channel).connect()
+        vc_client_list.append(vc)
+    
+    return vc_client_list
+
+def close_vc_connections(client):
+    vc_client_list = []
+    general_voice_channels = collect_general_voice_channels(client)
+    for guild,gc_channel in general_voice_channels.items(): 
+        vc = await client.get_channel(gc_channel).connect()
+        vc_client_list.append(vc)
+    for vc in vc_client_list:
+        vc.disconnect
 
 #Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):

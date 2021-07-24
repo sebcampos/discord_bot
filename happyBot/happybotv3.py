@@ -21,12 +21,7 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 #Using the on_ready() event handler to begin tasks
 @client.event
 async def on_ready():
-    vc_client_list = []
-    #connect to music channel
-    general_voice_channels = collect_general_voice_channels(client)
-    for guild,gc_channel in general_voice_channels.items(): 
-        vc = await client.get_channel(gc_channel).connect()
-        vc_client_list.append(vc)
+    vc_client_list = start_music_player_connections(client)
     
     guild_dict_gc = collect_general_chat_all_guilds(client)
     #tasks
@@ -42,10 +37,15 @@ async def on_ready():
 async def on_message(message):
     #DM to HappyBot
     if isinstance(message.channel, discord.channel.DMChannel) and message.author != client.user:
-        with open("../data/logs/happybot_feedback.txt","a") as log:
-            log.write(f"\n{datetime.datetime.now()}\n{message.content}\n\n")
-        await message.channel.send(f'Suggestion added, thank yous {message.author.name.split("#")[0]}!')
-
+        if "suggestion" in content.lower().split(" ")[0]:
+            with open("../data/logs/happybot_feedback.txt","a") as log:
+                log.write(f"\n{datetime.datetime.now()}\n{message.content}\n\n")
+                await message.channel.send(f'Suggestion added, thank yous {message.author.name.split("#")[0]}!')
+        
+        elif "restart_player" in content.lower().split(" ")[0]:
+            close_vc_connections(client)
+            vc_client_list = start_music_player_connections(client)
+            musicplayer.restart(vc_client_list)
     
 
 #on member join happybot welcomes them with a gif

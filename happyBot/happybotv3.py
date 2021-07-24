@@ -37,12 +37,12 @@ async def on_ready():
 async def on_message(message):
     #DM to HappyBot
     if isinstance(message.channel, discord.channel.DMChannel) and message.author != client.user:
-        if "suggestion" in content.lower().split(" ")[0]:
+        if "suggestion" in message.content.lower().split(" ")[0]:
             with open("../data/logs/happybot_feedback.txt","a") as log:
                 log.write(f"\n{datetime.datetime.now()}\n{message.content}\n\n")
                 await message.channel.send(f'Suggestion added, thank yous {message.author.name.split("#")[0]}!')
         
-        elif "restart_player" in content.lower().split(" ")[0]:
+        elif "restart_player" in message.content.lower().split(" ")[0]:
             await close_vc_connections(client)
             vc_client_list =  await start_music_player_connections(client)
             musicplayer.restart(vc_client_list)
@@ -107,7 +107,7 @@ async def goodmorning(guild_dict_gc):
     
 
 #music player
-@tasks.loop(seconds=15)
+@tasks.loop(seconds=60)
 async def musicplayer(vc_client_list):
     for music_file in os.listdir("../data/mp3s"):
         for vc in vc_client_list:

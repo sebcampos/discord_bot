@@ -256,7 +256,7 @@ async def close_vc_connections(client):
     vc_client_list = []
     general_voice_channels = collect_general_voice_channels(client)
     for guild,gc_channel in general_voice_channels.items(): 
-        vc = await client.get_channel(gc_channel)
+        vc = client.get_channel(gc_channel)
         await vc.disconnect()
 #Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):

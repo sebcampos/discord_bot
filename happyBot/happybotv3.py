@@ -28,21 +28,12 @@ async def on_ready():
         vc = await client.get_channel(gc_channel).connect()
         vc_client_list.append(vc)
     
-    for music_file in os.listdir("../data/mp3s"):
-        for vc in vc_client_list:
-            if vc.is_playing() != True:
-                print("begining to play")
-                print(f"\n\n{type(vc)}\n\n")
-                vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
-            else:
-                print(f"{vc} conditional met")
-                break
-
-    # musicplayer.start(vc_client_list)
+    guild_dict_gc = collect_general_chat_all_guilds(client)
+    #tasks
     # scrape_web.start()
     # goodmorning.start(guild_dict_gc)
     # new_user_of_the_week.start(guild_dict_gc)
-    
+    musicplayer.start(vc_client_list)
     
 
 
@@ -115,6 +106,18 @@ async def goodmorning(guild_dict_gc):
 
     
 
+#music player
+@tasks.loop(seconds=15)
+async def musicplayer(vc_client_list):
+    for music_file in os.listdir("../data/mp3s"):
+        for vc in vc_client_list:
+            if vc.is_playing() != True:
+                print("begining to play")
+                print(f"\n\n{type(vc)}\n\n")
+                vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
+            else:
+                print(f"{vc} conditional met")
+                break
 
                 
 

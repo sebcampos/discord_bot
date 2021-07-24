@@ -98,7 +98,7 @@ class WebScraper:
                 for f in os.listdir():
                     if ".mp3" not in f:
                         video = VideoFileClip(f)
-                        video.audio.write_audiofile(f"{f.split(".")[0].replace(" ","_")}.mp3")
+                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_")}.mp3')
                         os.remove(f)
 
 

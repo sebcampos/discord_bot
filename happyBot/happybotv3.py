@@ -108,7 +108,7 @@ async def goodmorning(guild_dict_gc):
     
 
 #music player
-@tasks.loop(seconds=30)
+@tasks.loop(minutes=300)
 async def musicplayer(vc_client_list):
     for music_file in os.listdir("../data/mp3s"):
         for vc in vc_client_list:
@@ -117,6 +117,7 @@ async def musicplayer(vc_client_list):
                 print(f"\n\n{type(vc)}\n\n")
                 vc.play(discord.FFmpegPCMAudio(f'../data/mp3s/{music_file}'), after=lambda x: print('done', x))
             else:
+                print(f"{vc} conditional met")
                 break
 
                 

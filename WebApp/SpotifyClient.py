@@ -10,6 +10,7 @@ class SpotifyClient:
     def __init__(self, CLIENT_ID=CLIENT_ID, CLIENT_SECRET=CLIENT_SECRET):
         self.client_id = CLIENT_ID
         self.client_secret = CLIENT_SECRET
+        self.token = None
     
     #build authorization url
     def build_url(self):
@@ -34,6 +35,7 @@ class SpotifyClient:
         )
         payload = response.json()
         pprint.pprint(payload)
+        self.token = payload['access_token']
         return payload
     
     #refresh token using payload data
@@ -49,6 +51,7 @@ class SpotifyClient:
         )
         payload = response.json()
         pprint.pprint(payload)
+        self.token = payload['access_token']
         return payload
     
     #query the search api

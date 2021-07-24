@@ -17,9 +17,8 @@ def setup():
     if request.method == "GET":
         code = sc.return_code(request.url)
         payload = sc.authorize(code)
-        access_token = payload["access_token"]
-        data = sc.search_api(token=access_token, query=input("query:\n"))
-    return render_template("Welcome.html", data=data, token=access_token)
+        data = sc.search_api(token=sc.access_token, query=input("query:\n"))
+    return render_template("Welcome.html", data=data, token=sc.access_token)
 
 
 if __name__ == "__main__":

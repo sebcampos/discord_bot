@@ -229,11 +229,13 @@ def collect_general_chat_all_guilds(client):
     return guild_dict
 
 def collect_general_voice_channels(client):
-    guild_dict = {guild:0 for guild in client.guilds}
+    guild_dict = {guild:None for guild in client.guilds}
     for guild in client.guilds:
         for channel in guild.channels:
             if str(channel.type) == "voice" and "general" in channel.name.lower():
-                guild_dict[guild] += channel
+                guild_dict[guild] = channel
+    print(channel)
+    print(type(channel))
     return guild_dict
 
 

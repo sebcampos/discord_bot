@@ -108,11 +108,11 @@ async def musicplayer():
         for music_file in os.listdir("../data/mp3s"):
             print(music_file)
             vc = await client.get_channel(gc_channel).connect()
-            if vc.is_playing() == True:
-                return
-            elif vc.is_playing() != True:
+            print(vc.is_playing())
+            if vc.is_playing() != True:
+                print("begining to play")
                 await vc.play(discord.FFmpegPCMAudio(f'../data/mp3s/{music_file}'), after=lambda x: print('done', x))
-
+                
 
 
 client.run(DISCORD_TOKEN)

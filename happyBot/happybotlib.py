@@ -252,7 +252,7 @@ async def start_music_player_connections(client):
     return vc_client_list
 
 #close musicplayer connections
-async def close_vc_connections(client):
+async def close_vc_connections(client, message):
     for vc in client.voice_clients:
         print(vc, vc.guild)
         if vc.guild == message.guild:

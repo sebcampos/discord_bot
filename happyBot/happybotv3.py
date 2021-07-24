@@ -21,8 +21,8 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 #Using the on_ready() event handler to begin tasks
 @client.event
 async def on_ready():
-    vc_client_list = start_music_player_connections(client)
-    
+    vc_client_list = await start_music_player_connections(client)
+    print(vc_client_list)
     guild_dict_gc = collect_general_chat_all_guilds(client)
     #tasks
     # scrape_web.start()
@@ -43,8 +43,8 @@ async def on_message(message):
                 await message.channel.send(f'Suggestion added, thank yous {message.author.name.split("#")[0]}!')
         
         elif "restart_player" in content.lower().split(" ")[0]:
-            close_vc_connections(client)
-            vc_client_list = start_music_player_connections(client)
+            await close_vc_connections(client)
+            vc_client_list =  await start_music_player_connections(client)
             musicplayer.restart(vc_client_list)
     
 

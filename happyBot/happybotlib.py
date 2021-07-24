@@ -14,6 +14,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import bs4
 import time
 from youtube_dl import YoutubeDL
+from moviepy.editor import *
 
 
 class DataBase:
@@ -89,17 +90,26 @@ class WebScraper:
     
     #scrape from youtube
     def scrape_youtube(self, url):
+        os.chdir("../data/mp3s")
         if ".com" in url:
             audio_downloader = YoutubeDL()
             try:
                 audio_downloader.extract_info(url)
+                for f in os.listdir():
+                    if ".mp3" not in f:
+                        video = VideoFileClip(f)
+                        video.audio.write_audiofile(f"{f.split(".")[0].replace(" ","_")}.mp3")
+                        os.remove(f)
+
+
+                os.chdir("../../happyBot")
             except:
+                os.chdir("../../happyBot")
                 with open("../data/logs/errors.log","a") as f:
                     f.write(f"{url} was not downloaded")
                 return "could not be processed"
 
-
-
+    
     
     #Scrapeing a goodmorning gif search
     def goodmorning_gif(self):

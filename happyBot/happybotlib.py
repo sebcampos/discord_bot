@@ -90,7 +90,7 @@ class WebScraper:
     #scrape from youtube
     def scrape_youtube(self, url):
         if ".com" in url:
-            audio_downloader = YoutubeDL({"format":"bestaudio"})
+            audio_downloader = YoutubeDL()
             try:
                 audio_downloader.extract_info(url)
             except:

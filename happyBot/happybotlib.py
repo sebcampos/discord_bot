@@ -233,7 +233,7 @@ def collect_general_voice_channels(client):
     for guild in client.guilds:
         for channel in guild.channels:
             if str(channel.type) == "voice" and "general" in channel.name.lower():
-                guild_dict[guild] += channel.id
+                guild_dict[guild] += channel
     return guild_dict
 
 

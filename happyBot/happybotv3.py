@@ -22,17 +22,18 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 @client.event
 async def on_ready():
     guild_dict_gc = collect_general_chat_all_guilds(client)
-    scrape_web.start()
-    goodmorning.start(guild_dict_gc)
-    new_user_of_the_week.start(guild_dict_gc)
     #connect to music channel
     general_voice_channels = collect_general_voice_channels(client)
     for guild,gc_channel in general_voice_channels.items(): 
         for music_file in os.listdir("../data/mp3s"):
             vc = await client.get_channel(gc_channel).connect()
+            print(vc)
             vc.play(discord.FFmpegPCMAudio(f'../data/mp3s/{music_file}'), after=lambda x: print('done', x))
-            await vc.is_playing()
-
+            print(vc.is_playing())
+    
+    scrape_web.start()
+    goodmorning.start(guild_dict_gc)
+    new_user_of_the_week.start(guild_dict_gc)
     
     
 

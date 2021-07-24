@@ -26,7 +26,7 @@ async def on_ready():
     goodmorning.start(guild_dict_gc)
     new_user_of_the_week.start(guild_dict_gc)
     #connect to music channel
-    general_voice_channels = collect_general_chat_all_guilds(client)
+    general_voice_channels = collect_general_voice_channels(client)
     for guild,gc_channel in general_voice_channels.items(): 
         for music_file in os.listdir("../data/mp3s"):
             vc = await client.get_channel(gc_channel).connect()

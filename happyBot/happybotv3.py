@@ -30,7 +30,7 @@ async def on_ready():
     for guild,gc_channel in general_voice_channels.items(): 
         for music_file in os.listdir("../data/mp3s"):
             vc = await client.get_channel(gc_channel).connect()
-            vc.play(discord.FFmpegPCMAudio(f'../data/mp3s/{music_file}', after=lambda: print('done'))
+            vc.play(discord.FFmpegPCMAudio(f'../data/mp3s/{music_file}'), after=lambda x: print('done', x))
             await vc.is_playing()
 
     

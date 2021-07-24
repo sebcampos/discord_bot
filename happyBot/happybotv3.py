@@ -115,7 +115,7 @@ async def musicplayer(vc_client_list):
             if vc.is_playing() != True:
                 print("begining to play")
                 print(f"\n\n{type(vc)}\n\n")
-                vc.play(discord.FFmpegPCMAudio(f'../data/mp3s/{music_file}'), after=lambda x: print('done', x))
+                vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
             else:
                 print(f"{vc} conditional met")
                 break

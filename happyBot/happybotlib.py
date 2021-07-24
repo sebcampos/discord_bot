@@ -240,7 +240,7 @@ def collect_general_voice_channels(client):
     return guild_dict
 
 
-def start_music_player_connections(client):
+async def start_music_player_connections(client):
     vc_client_list = []
     #connect to music channel
     general_voice_channels = collect_general_voice_channels(client)
@@ -250,7 +250,7 @@ def start_music_player_connections(client):
     
     return vc_client_list
 
-def close_vc_connections(client):
+async def close_vc_connections(client):
     vc_client_list = []
     general_voice_channels = collect_general_voice_channels(client)
     for guild,gc_channel in general_voice_channels.items(): 

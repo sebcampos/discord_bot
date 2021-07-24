@@ -35,7 +35,7 @@ async def on_ready():
             while not player.is_done():
                 await asyncio.sleep(1)
             player.stop()
-        await vc.disconnect()
+            await vc.disconnect()
     
     
 

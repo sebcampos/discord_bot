@@ -21,8 +21,16 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 #Using the on_ready() event handler to begin tasks
 @client.event
 async def on_ready():
+    vc_client_list = []
+    #connect to music channel
+    general_voice_channels = collect_general_voice_channels(client)
+    for guild,gc_channel in general_voice_channels.items(): 
+        vc = await client.get_channel(gc_channel).connect()
+        vc_client_list.append(vc)
+    
     guild_dict_gc = collect_general_chat_all_guilds(client)
-    musicplayer.start()
+    #tasks
+    musicplayer.start(vc_client_list)
     scrape_web.start()
     goodmorning.start(guild_dict_gc)
     new_user_of_the_week.start(guild_dict_gc)
@@ -101,17 +109,14 @@ async def goodmorning(guild_dict_gc):
 
 #music player
 @tasks.loop(seconds=30)
-async def musicplayer():
-    #connect to music channel
-    general_voice_channels = collect_general_voice_channels(client)
-    for guild,gc_channel in general_voice_channels.items(): 
-        for music_file in os.listdir("../data/mp3s"):
-            print(music_file)
-            vc = await client.get_channel(gc_channel).connect()
-            print(vc.is_playing())
+async def musicplayer(vc_client_list):
+    for music_file in os.listdir("../data/mp3s"):
+        for vc in vc_client_list:
             if vc.is_playing() != True:
                 print("begining to play")
-                await vc.play(discord.FFmpegPCMAudio(f'../data/mp3s/{music_file}'), after=lambda x: print('done', x))
+                vc.play(discord.FFmpegPCMAudio(f'../data/mp3s/{music_file}'), after=lambda x: print('done', x))
+            else:
+                continue
                 
 
 

@@ -25,6 +25,19 @@ async def on_ready():
     scrape_web.start()
     goodmorning.start(guild_dict_gc)
     new_user_of_the_week.start(guild_dict_gc)
+    #connect to music channel
+    general_voice_channels = collect_general_chat_all_guilds(client)
+    for guild,gc_channel in general_voice_channels.items(): 
+        for music_file in os.listdir("../data/mp3s"):
+            vc = await client.join_voice_channel(gc_channel)
+            player = vc.create_ffmpeg_player(f'../data/mp3s/{music_file}', after=lambda: print('done'))
+            player.start()
+            while not player.is_done():
+                await asyncio.sleep(1)
+            player.stop()
+        await vc.disconnect()
+    
+    
 
 
 #when DM'd happybot logs the suggestion
@@ -48,7 +61,6 @@ async def on_member_join(member):
     with open("../data/logs/new_member.log","a") as new_members:
         new_members.write(f"{user.username}, {user.user_id}, {user.guild}\n")
 
-#TODO: add a music channel
 
 
 

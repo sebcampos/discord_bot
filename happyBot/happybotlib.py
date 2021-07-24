@@ -96,14 +96,20 @@ class WebScraper:
             try:
                 audio_downloader.extract_info(url)
                 for f in os.listdir():
-                    if ".mp3" not in f:
+                    if ".mp4" in f and ".mp3" not in f:
                         video = VideoFileClip(f)
-                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_")}.mp3')
+                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_").replace("-","_")}.mp3')
                         os.remove(f)
 
 
                 os.chdir("../../happyBot")
+                return "File Processed"
             except:
+                for f in os.listdir():
+                    if ".mp4" in f and ".mp3" not in f:
+                        video = VideoFileClip(f)
+                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_").replace("-","_")}.mp3')
+                        os.remove(f)
                 os.chdir("../../happyBot")
                 with open("../data/logs/errors.log","a") as f:
                     f.write(f"{url} was not downloaded")
@@ -221,6 +227,15 @@ def collect_general_chat_all_guilds(client):
             if "general" in channel.name:
                 guild_dict[guild] += channel.id
     return guild_dict
+
+def collect_general_voice_channels(client):
+    guild_dict = {guild:0 for guild in client.guilds}
+    for guild in client.guilds:
+        for channel in guild.channels:
+            if str(channel.type) == "voice" and "general" in channel.name.lower():
+                guild_dict[guild] += channel.id
+    return guild_dict
+
 
 #Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):

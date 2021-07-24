@@ -13,6 +13,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 import bs4
 import time
+from youtube_dl import YoutubeDL
 
 
 class DataBase:
@@ -85,6 +86,20 @@ class WebScraper:
     def visit(self, url):
         self.driver.get(url)
         return self.driver.page_source
+    
+    #scrape from youtube
+    def scrape_youtube(self, url):
+        if ".com" in url:
+            audio_downloader = YoutubeDL({"format":"bestaudio"})
+            try:
+                audio_downloader.extract_info(url)
+            except:
+                with open("../data/logs/errors.log","a") as f:
+                    f.write(f"{url} was not downloaded")
+                return "could not be processed"
+
+
+
     
     #Scrapeing a goodmorning gif search
     def goodmorning_gif(self):

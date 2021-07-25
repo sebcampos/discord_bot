@@ -44,8 +44,7 @@ async def on_message(message):
         
         elif "restart_player" in message.content.lower().split(" ")[0]:
             close_vc_connections(client, message)
-            vc_client_list =  await start_music_player_connections(client)
-            musicplayer.restart(vc_client_list)
+            #musicplayer.restart(vc_client_list =  await start_music_player_connections(client))
     
 
 #on member join happybot welcomes them with a gif
@@ -107,7 +106,7 @@ async def goodmorning(guild_dict_gc):
     
 
 #music player
-@tasks.loop(seconds=60)
+@tasks.loop(seconds=18)
 async def musicplayer(vc_client_list):
     for music_file in os.listdir("../data/mp3s"):
         for vc in vc_client_list:
@@ -116,7 +115,7 @@ async def musicplayer(vc_client_list):
                 print(f"\n\n{type(vc)}\n\n")
                 vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
             else:
-                print(f"{vc} conditional met")
+                print(f"{vc} Not playing")
                 break
 
                 

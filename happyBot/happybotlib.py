@@ -103,7 +103,7 @@ class WebScraper:
                         res = requests.get(song_link)
                         f.write(res.content)
                 elif ".mp4" in song_link:
-                    print(song_link):
+                    print(song_link)
                     with open(f"../data/mp3s/{songs}.mp4","wb") as f:
                         print('#------------------ ',songs,' downloading----------#')
                         res = requests.get(song_link)

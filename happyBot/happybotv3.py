@@ -38,7 +38,7 @@ async def on_message(message):
     if isinstance(message.channel, discord.channel.DMChannel) and message.author != client.user:
         if "suggestion" in message.content.lower().split(" ")[0]:
             with open("../data/logs/happybot_feedback.txt","a") as log:
-                log.write(f"\n{datetime.datetime.now()}\n{message.content}\n\n")
+                log.write(f"\n{datetime.datetime.now()}\n{message.author.name.split("#")[0]}:\n{message.content}\n\n")
                 await message.channel.send(f'Suggestion added, thank yous {message.author.name.split("#")[0]}!')
         
         elif "restart_players" in message.content.lower().split(" ")[0]:
@@ -52,10 +52,12 @@ async def on_message(message):
             await message.channel.send(string)
         
         elif "change_song" in message.content.lower().split(" ")[0]:
-            if message.content.lower().split(" ")[1] in [i.remove(".mp3") for i in os.listdir("..data/mp3s")]:
+            if message.content.split(" ")[1] in os.listdir("../data/mp3s"):
                 await close_vc_connections(client)
                 vc_client_list =  await start_music_player_connections(client)
-                musicplayer.restart(vc_client_list,songs = f'{message.content.lower().split(" ")[1]}.mp3')
+                musicplayer.restart(vc_client_list,songs = f'{message.content.lower().split(" ")[1]}')
+            else:
+                await message.channel.send("song not in available list: use command list_songs to view available songs")
 
         elif "download_song" in message.content.lower().split(" ")[0]:
             ws = WebScraper()
@@ -68,12 +70,12 @@ async def on_message(message):
 #on member join happybot welcomes them with a gif
 @client.event
 async def on_member_join(member):
-    await member.send(f'Welcome {member.name.split("#")[0]}\n(message me suggestions please!)')
+    await member.send(f'Welcome {member.name.split("#")[0]}\n')
     await member.send(file=discord.File(pick_random_welcome_gif()))
     user = User(member.name, member.id, member.guild, "NaN","NaN","NaN")
     print(user)
     with open("../data/logs/new_member.log","a") as new_members:
-        new_members.write(f"{user.username}, {user.user_id}, {user.guild}\n")
+        new_members.write(f"\n{user.username}, {user.user_id}, {user.guild}\n")
 
 
 
@@ -124,7 +126,7 @@ async def goodmorning(guild_dict_gc):
     
 
 #music player
-@tasks.loop(seconds=60)
+@tasks.loop(seconds=30)
 async def musicplayer(vc_client_list, songs = False):
     if songs == False:
         for music_file in os.listdir("../data/mp3s"):
@@ -134,17 +136,18 @@ async def musicplayer(vc_client_list, songs = False):
                     print(f"\n\n{type(vc)}\n\n")
                     vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
                 else:
-                    print(f"{vc} is Playing")
+                    #print(f"{vc} is Playing")
                     break
     elif songs == True:
-        for music_file in [songs]:
+        lst = [songs] + os.listdir("../data/mp3s")
+        for music_file in lst:
             for vc in vc_client_list:
                 if vc.is_playing() != True:
                     print("begining to play")
                     print(f"\n\n{type(vc)}\n\n")
                     vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
                 else:
-                    print(f"{vc} is Playing")
+                    #print(f"{vc} is Playing")
                     break
 
 

@@ -55,7 +55,7 @@ async def on_message(message):
             if message.content.split(" ")[1] in os.listdir("../data/mp3s"):
                 await close_vc_connections(client)
                 vc_client_list =  await start_music_player_connections(client)
-                musicplayer.restart(vc_client_list,songs = f'{message.content.lower().split(" ")[1]}')
+                musicplayer.restart(vc_client_list,songs = f'{message.content.split(" ")[1]}')
             else:
                 await message.channel.send("song not in available list: use command list_songs to view available songs")
 
@@ -75,7 +75,7 @@ async def on_member_join(member):
     user = User(member.name, member.id, member.guild, "NaN","NaN","NaN")
     print(user)
     with open("../data/logs/new_member.log","a") as new_members:
-        new_members.write(f"\n{user.username}, {user.user_id}, {user.guild}\n")
+        new_members.write(f"\n\n{user.username}, {user.user_id}, {user.guild}\n\n")
 
 
 

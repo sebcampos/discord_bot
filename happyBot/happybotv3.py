@@ -142,6 +142,7 @@ async def musicplayer(vc_client_list, songs = False):
                     #print(f"{vc} is Playing")
                     break
     elif songs == True:
+        print("condition met")
         lst = [songs] + os.listdir("../data/mp3s")
         for music_file in lst:
             for vc in vc_client_list:

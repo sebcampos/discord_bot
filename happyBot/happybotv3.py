@@ -44,7 +44,9 @@ async def on_message(message):
         
         elif "restart_players" in message.content.lower().split(" ")[0]:
             print("restarting all players")
-            await close_vc_connections(client)
+            for vc in client.voice_clients:
+                print(vc)
+                await vc.disconnect()
 
             #musicplayer.restart(vc_client_list =  await start_music_player_connections(client))
     

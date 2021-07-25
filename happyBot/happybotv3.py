@@ -140,8 +140,8 @@ async def musicplayer(vc_client_list, songs = False):
                     vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
                 else:
                     #print(f"{vc} is Playing")
-                    break
-    elif songs == True:
+                    pass
+    elif songs != True:
         print("condition met")
         lst = [songs] + os.listdir("../data/mp3s")
         for music_file in lst:
@@ -152,7 +152,7 @@ async def musicplayer(vc_client_list, songs = False):
                     vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
                 else:
                     #print(f"{vc} is Playing")
-                    break
+                    pass
 
 
                 

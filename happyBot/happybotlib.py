@@ -90,33 +90,33 @@ class WebScraper:
     
     #scrape from youtube
     def scrape_youtube(self, url):
-        os.chdir("../data/mp3s")
-        if ".com" in url:
-            audio_downloader = YoutubeDL()
-            try:
-                audio_downloader.extract_info(url)
-                time.sleep(30)
-                print("complete")
-                for f in os.listdir():
-                    if ".mp4" in f and ".mp3" not in f:
-                        print("starting video conversion")
-                        video = VideoFileClip(f)
-                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_").replace("-","_")}.mp3')
-                        os.remove(f)
-
-
-                os.chdir("../../happyBot")
-                return "File Processed"
-            except:
-                for f in os.listdir():
-                    if ".mp4" in f and ".mp3" not in f:
-                        video = VideoFileClip(f)
-                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_").replace("-","_")}.mp3')
-                        os.remove(f)
-                os.chdir("../../happyBot")
-                with open("../data/logs/errors.log","a") as f:
-                    f.write(f"{url} was not downloaded")
-                return "could not be processed"
+        try:
+            response = requests.get(url).content
+            data = bs4.BeautifulSoup(response, 'html.parser').find_all('a')
+            for link in data:
+                song_link = link["href"]
+                songs = link.text
+                if ".mp3" in song_link:
+                    print(song_link):
+                    with open(f"../data/mp3s/{songs}.mp3","wb") as f:
+                        print('#------------------ ',songs,' downloading----------#')
+                        res = requests.get(song_link)
+                        f.write(res.content)
+                elif ".mp4" in song_link:
+                    print(song_link):
+                    with open(f"../data/mp3s/{songs}.mp4","wb") as f:
+                        print('#------------------ ',songs,' downloading----------#')
+                        res = requests.get(song_link)
+                        f.write(res.content)
+                    for f in os.listdir("../data/mp3s"):
+                        if ".mp4" in f: 
+                            print("starting video conversion")
+                            video = VideoFileClip(f)
+                            video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_").replace("-","_")}.mp3')
+                            os.remove(f"../data/mp3s/{f}")
+            return "File Processed"
+        except:
+            return "could not be processed"
 
     
     

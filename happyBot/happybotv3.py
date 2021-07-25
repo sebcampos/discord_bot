@@ -22,7 +22,6 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 @client.event
 async def on_ready():
     vc_client_list = await start_music_player_connections(client)
-    print(vc_client_list)
     guild_dict_gc = collect_general_chat_all_guilds(client)
     #tasks
     # scrape_web.start()
@@ -45,8 +44,24 @@ async def on_message(message):
         elif "restart_players" in message.content.lower().split(" ")[0]:
             print("restarting all players")
             await close_vc_connections(client)
-            vc_client_list =  await start_music_player_connections(client)
+            await vc_client_list =  await start_music_player_connections(client)
             musicplayer.restart(vc_client_list)
+        
+        elif "list_songs" in message.content.lower().split(" ")[0]:
+            string = "\n".join(os.listdir("../data/mp3s"))
+            await message.channel.send(string)
+        
+        elif "change_song" in message.content.lower().split(" ")[0]:
+            if message.content.lower().split(" ")[1] in [i.remove(".mp3") for i in os.listdir("..data/mp3s")]:
+                await close_vc_connections(client)
+                await vc_client_list =  await start_music_player_connections(client)
+                musicplayer.restart(vc_client_list,songs = f'{message.content.lower().split(" ")[1]}.mp3')
+
+        elif "download_song" in message.content.lower().split(" ")[0]:
+            ws = WebScraper()
+            response = ws.scrape_youtube(message.conent.lower().split(" ")[1])
+            await message.channel.send(response)
+            ws.quit()
     
 
 #on member join happybot welcomes them with a gif
@@ -109,16 +124,28 @@ async def goodmorning(guild_dict_gc):
 
 #music player
 @tasks.loop(seconds=18)
-async def musicplayer(vc_client_list):
-    for music_file in os.listdir("../data/mp3s"):
-        for vc in vc_client_list:
-            if vc.is_playing() != True:
-                print("begining to play")
-                print(f"\n\n{type(vc)}\n\n")
-                vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
-            else:
-                print(f"{vc} is Playing")
-                break
+async def musicplayer(vc_client_list, songs = False):
+    if songs == False:
+        for music_file in os.listdir("../data/mp3s"):
+            for vc in vc_client_list:
+                if vc.is_playing() != True:
+                    print("begining to play")
+                    print(f"\n\n{type(vc)}\n\n")
+                    vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
+                else:
+                    print(f"{vc} is Playing")
+                    break
+    elif songs == True:
+        for music_file in [songs]:
+            for vc in vc_client_list:
+                if vc.is_playing() != True:
+                    print("begining to play")
+                    print(f"\n\n{type(vc)}\n\n")
+                    vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
+                else:
+                    print(f"{vc} is Playing")
+                    break
+
 
                 
 

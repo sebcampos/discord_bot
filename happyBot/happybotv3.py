@@ -59,7 +59,7 @@ async def on_message(message):
 
         elif "download_song" in message.content.lower().split(" ")[0]:
             ws = WebScraper()
-            response = ws.scrape_youtube(message.content.lower().split(" ")[1])
+            response = ws.scrape_youtube(message.content.split(" ")[1])
             ws.quit()
             await message.channel.send(response)
             

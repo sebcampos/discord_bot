@@ -48,7 +48,7 @@ async def on_message(message):
             musicplayer.restart(vc_client_list)
         
         elif "list_songs" in message.content.lower().split(" ")[0]:
-            string = "\n".join(os.listdir("../data/mp3s"))
+            string = "\n\n".join(os.listdir("../data/mp3s"))
             await message.channel.send(string)
         
         elif "change_song" in message.content.lower().split(" ")[0]:
@@ -140,7 +140,7 @@ async def musicplayer(vc_client_list, songs = False):
                     vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
                 else:
                     #print(f"{vc} is Playing")
-                    pass
+                    continue
     elif songs != True:
         print("condition met")
         lst = [songs] + os.listdir("../data/mp3s")
@@ -152,7 +152,7 @@ async def musicplayer(vc_client_list, songs = False):
                     vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
                 else:
                     #print(f"{vc} is Playing")
-                    pass
+                    continue
 
 
                 

@@ -100,7 +100,7 @@ class WebScraper:
                     if ".mp4" in f  or ".mkv" in f:
                         print("starting video conversion")
                         video = VideoFileClip(f)
-                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_").replace("-","_")}.mp3')
+                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","").replace("-","").replace("_","")}.mp3')
                         os.remove(f)
 
 
@@ -108,9 +108,9 @@ class WebScraper:
                 return "File Processed"
             except:
                 for f in os.listdir():
-                    if ".mp4" in f and ".mp3" not in f:
+                    if ".mp3" not in f:
                         video = VideoFileClip(f)
-                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_").replace("-","_")}.mp3')
+                        video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","").replace("-","").replace("_","")}.mp3')
                         os.remove(f)
                 os.chdir("../../happyBot")
                 with open("../data/logs/errors.log","a") as f:

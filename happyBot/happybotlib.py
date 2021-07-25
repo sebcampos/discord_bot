@@ -97,7 +97,7 @@ class WebScraper:
                 song_link = link["href"]
                 songs = link.text
                 if ".mp3" in song_link:
-                    print(song_link):
+                    print(song_link)
                     with open(f"../data/mp3s/{songs}.mp3","wb") as f:
                         print('#------------------ ',songs,' downloading----------#')
                         res = requests.get(song_link)

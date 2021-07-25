@@ -44,11 +44,9 @@ async def on_message(message):
         
         elif "restart_players" in message.content.lower().split(" ")[0]:
             print("restarting all players")
-            for vc in client.voice_clients:
-                print(vc)
-                await vc.disconnect()
-
-            #musicplayer.restart(vc_client_list =  await start_music_player_connections(client))
+            await close_vc_connections(client)
+            vc_client_list =  await start_music_player_connections(client)
+            musicplayer.restart(vc_client_list)
     
 
 #on member join happybot welcomes them with a gif

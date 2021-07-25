@@ -42,12 +42,10 @@ async def on_message(message):
                 log.write(f"\n{datetime.datetime.now()}\n{message.content}\n\n")
                 await message.channel.send(f'Suggestion added, thank yous {message.author.name.split("#")[0]}!')
         
-        elif "restart_player" in message.content.lower().split(" ")[0]:
-            print("condition met")
-            for vc in client.voice_clients:
-                print(vc.guild)
-                if vc.guild == message.guild:
-                    await vc.disconnect()
+        elif "restart_players" in message.content.lower().split(" ")[0]:
+            print("restarting all players")
+            await close_vc_connections(client)
+
             #musicplayer.restart(vc_client_list =  await start_music_player_connections(client))
     
 

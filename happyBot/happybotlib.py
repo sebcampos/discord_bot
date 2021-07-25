@@ -252,11 +252,10 @@ async def start_music_player_connections(client):
     return vc_client_list
 
 #close musicplayer connections
-def close_vc_connections(client, message):
+async def close_vc_connections(client):
     for vc in client.voice_clients:
-        print(vc, vc.guild)
-        if vc.guild == message.guild:
-            vc.disconnect()
+        print(vc)
+        await vc.disconnect()
 
 #Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):

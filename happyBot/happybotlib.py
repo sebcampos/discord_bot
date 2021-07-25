@@ -257,6 +257,7 @@ async def close_vc_connections(client, message):
         print(vc, vc.guild)
         if vc.guild == message.guild:
             await vc.disconnect()
+
 #Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):
     db = DataBase()

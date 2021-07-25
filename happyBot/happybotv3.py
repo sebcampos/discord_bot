@@ -24,9 +24,9 @@ async def on_ready():
     vc_client_list = await start_music_player_connections(client)
     guild_dict_gc = collect_general_chat_all_guilds(client)
     #tasks
-    scrape_web.start()
-    goodmorning.start(guild_dict_gc)
-    new_user_of_the_week.start(guild_dict_gc)
+    # scrape_web.start()
+    # goodmorning.start(guild_dict_gc)
+    # new_user_of_the_week.start(guild_dict_gc)
     musicplayer.start(vc_client_list)
     
 
@@ -64,6 +64,9 @@ async def on_message(message):
             response = ws.scrape_youtube(message.content.split(" ")[1])
             ws.quit()
             await message.channel.send(response)
+        
+        else:
+            await message.channel.send(f'Hello I am HappyBot!\n\ncommands:\n\nlist_songs -> lists available mp3s\nchange_song <song_name> -> change currently playing song to another song in library\ndownload_song <youtube_link> -> will download a youtube link and add song to library')
             
     
 

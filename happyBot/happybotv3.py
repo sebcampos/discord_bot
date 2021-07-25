@@ -124,7 +124,7 @@ async def goodmorning(guild_dict_gc):
     
 
 #music player
-@tasks.loop(seconds=18)
+@tasks.loop(seconds=60)
 async def musicplayer(vc_client_list, songs = False):
     if songs == False:
         for music_file in os.listdir("../data/mp3s"):

@@ -44,7 +44,7 @@ async def on_message(message):
         elif "restart_players" in message.content.lower().split(" ")[0]:
             print("restarting all players")
             await close_vc_connections(client)
-            await vc_client_list =  await start_music_player_connections(client)
+            vc_client_list =  await start_music_player_connections(client)
             musicplayer.restart(vc_client_list)
         
         elif "list_songs" in message.content.lower().split(" ")[0]:
@@ -54,14 +54,15 @@ async def on_message(message):
         elif "change_song" in message.content.lower().split(" ")[0]:
             if message.content.lower().split(" ")[1] in [i.remove(".mp3") for i in os.listdir("..data/mp3s")]:
                 await close_vc_connections(client)
-                await vc_client_list =  await start_music_player_connections(client)
+                vc_client_list =  await start_music_player_connections(client)
                 musicplayer.restart(vc_client_list,songs = f'{message.content.lower().split(" ")[1]}.mp3')
 
         elif "download_song" in message.content.lower().split(" ")[0]:
             ws = WebScraper()
-            response = ws.scrape_youtube(message.conent.lower().split(" ")[1])
-            await message.channel.send(response)
+            response = ws.scrape_youtube(message.content.lower().split(" ")[1])
             ws.quit()
+            await message.channel.send(response)
+            
     
 
 #on member join happybot welcomes them with a gif

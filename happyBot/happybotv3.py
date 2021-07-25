@@ -24,9 +24,9 @@ async def on_ready():
     vc_client_list = await start_music_player_connections(client)
     guild_dict_gc = collect_general_chat_all_guilds(client)
     #tasks
-    # scrape_web.start()
-    # goodmorning.start(guild_dict_gc)
-    # new_user_of_the_week.start(guild_dict_gc)
+    scrape_web.start()
+    goodmorning.start(guild_dict_gc)
+    new_user_of_the_week.start(guild_dict_gc)
     musicplayer.start(vc_client_list)
     
 
@@ -38,7 +38,7 @@ async def on_message(message):
     if isinstance(message.channel, discord.channel.DMChannel) and message.author != client.user:
         if "suggestion" in message.content.lower().split(" ")[0]:
             with open("../data/logs/happybot_feedback.txt","a") as log:
-                log.write(f"\n{datetime.datetime.now()}\n{message.author.name.split("#")[0]}:\n{message.content}\n\n")
+                log.write(f'\n{datetime.datetime.now()}\n{message.author.name.split("#")[0]}:\n{message.content}\n\n')
                 await message.channel.send(f'Suggestion added, thank yous {message.author.name.split("#")[0]}!')
         
         elif "restart_players" in message.content.lower().split(" ")[0]:

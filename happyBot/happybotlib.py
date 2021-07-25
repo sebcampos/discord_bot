@@ -95,8 +95,11 @@ class WebScraper:
             audio_downloader = YoutubeDL()
             try:
                 audio_downloader.extract_info(url)
+                time.sleep(30)
+                print("complete")
                 for f in os.listdir():
                     if ".mp4" in f and ".mp3" not in f:
+                        print("starting video conversion")
                         video = VideoFileClip(f)
                         video.audio.write_audiofile(f'{f.split(".")[0].replace(" ","_").replace("-","_")}.mp3')
                         os.remove(f)

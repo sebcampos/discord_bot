@@ -24,6 +24,9 @@ async def on_ready():
     global mp
     await mp.start_music_player_connections(client)
     for vc in mp.client_list:
+        print(vc)
+        random.choice(list(mp.library.values()))
+    for vc in mp.client_list:
         print(f"{vc} is starting")
         await mp.play_song(random.choice(list(mp.library.values())), vc, discord)
     #tasks

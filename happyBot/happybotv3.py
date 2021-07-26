@@ -23,7 +23,7 @@ async def on_ready():
     mp = MusicPlayer()
     await mp.start_music_player_connections(client)
     for vc in mp.client_list:
-        vc.play_song(random.choice(list(mp.library.values())), channel)
+        mp.play_song(random.choice(list(mp.library.values())), vc)
     #tasks
     # scrape_web.start()
     # goodmorning.start(guild_dict_gc)

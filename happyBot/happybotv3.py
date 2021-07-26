@@ -18,7 +18,7 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 
 #MusicPlayer
 mp = MusicPlayer()
-mp.start_music_player_connections()
+mp.start_music_player_connections(client)
 for channel in mp.client_list:
     mp.play_song(random.choice(mp.library.values()), channel)
 
@@ -26,8 +26,6 @@ for channel in mp.client_list:
 #Using the on_ready() event handler to begin tasks
 @client.event
 async def on_ready():
-    vc_client_list = await start_music_player_connections(client)
-    guild_dict_gc = collect_general_chat_all_guilds(client)
     #tasks
     # scrape_web.start()
     # goodmorning.start(guild_dict_gc)
@@ -47,9 +45,9 @@ async def on_message(message):
         
         elif "restart_players" in message.content.lower().split(" ")[0]:
             print("restarting all players")
-            await close_vc_connections(client)
-            vc_client_list =  await start_music_player_connections(client)
-            musicplayer.restart(vc_client_list)
+            await mp.close_vc_connections(client)
+            await mp.start_music_player_connections(client)
+            musicplayer.restart()
         
         elif "list_songs" in message.content.lower().split(" ")[0]:
             string = "\n\n".join(os.listdir("../data/mp3s"))
@@ -57,9 +55,9 @@ async def on_message(message):
         
         elif "change_song" in message.content.lower().split(" ")[0]:
             if message.content.split(" ")[1] in os.listdir("../data/mp3s"):
-                await close_vc_connections(client)
-                vc_client_list =  await start_music_player_connections(client)
-                musicplayer.restart(vc_client_list,songs = f'{message.content.split(" ")[1]}')
+                await mp.close_vc_connections(client)
+                await mp.start_music_player_connections(client)
+                musicplayer.restart()
             else:
                 await message.channel.send("song not in available list: use command list_songs to view available songs")
 
@@ -136,6 +134,7 @@ async def goodmorning(guild_dict_gc):
 @tasks.loop(seconds=30)
 async def musicplayer():
     global mp
+    print("starting")
     if mp.is_playing != True:
         return "Nothing playing"
     elif mp.is_playing != False:

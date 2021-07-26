@@ -241,7 +241,7 @@ class MusicPlayer():
             vc = await client.get_channel(gc_channel).connect()
             vc_client_list.append(vc)
         
-        self.client_list = vc_client_list
+        await self.client_list = vc_client_list
     
     #close musicplayer connections
     async def close_vc_connections(self, client):

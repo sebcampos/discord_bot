@@ -21,9 +21,9 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 async def on_ready():
     #MusicPlayer
     mp = MusicPlayer()
-    mp.start_music_player_connections(client)
-    for channel in mp.client_list:
-        mp.play_song(random.choice(mp.library.values()), channel)
+    await mp.start_music_player_connections(client)
+    for vc in mp.client_list:
+        vc.play_song(random.choice(mp.library.values()), channel)
     #tasks
     # scrape_web.start()
     # goodmorning.start(guild_dict_gc)

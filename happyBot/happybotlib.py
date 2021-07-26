@@ -250,7 +250,7 @@ class MusicPlayer():
             await vc.disconnect()
         self.is_playing = False
         self.playlist = None
-        self.client_list
+        self.client_list = None
 
     async def play_song(self, song, vc):
         vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', print(type(x))))

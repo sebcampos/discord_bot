@@ -141,7 +141,7 @@ async def musicplayer():
     if mp.is_playing != True:
         return "Nothing playing"
     elif mp.is_playing != False:
-        print(mp.library)
+        print(mp.currently_playing)
 
 
 

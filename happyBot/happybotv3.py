@@ -15,12 +15,13 @@ intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 GUILD_NAME = "PTCB Study Group 💊💉"
 
+#MusicPlayer
+mp = MusicPlayer()
 
 #Using the on_ready() event handler to begin tasks
 @client.event
 async def on_ready():
-    #MusicPlayer
-    mp = MusicPlayer()
+    global mp
     await mp.start_music_player_connections(client)
     for vc in mp.client_list:
         mp.play_song(random.choice(list(mp.library.values())), vc)

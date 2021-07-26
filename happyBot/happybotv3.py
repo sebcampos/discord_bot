@@ -26,10 +26,7 @@ async def on_ready():
     for vc in mp.client_list:
         print(f"{vc} is starting")
         song = random.choice(list(mp.library.values())
-        try:
-            await mp.play_song(song, vc, discord)
-        except:
-            print(f"{vc} did not start with song {song}")
+        await mp.play_song(song, vc, discord)
     #tasks
     # scrape_web.start()
     # goodmorning.start(guild_dict_gc)

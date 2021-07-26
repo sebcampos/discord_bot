@@ -199,7 +199,6 @@ class User:
         }))
         db.close_connection()
 
-
 #class for happybot initial setup
 class FirstSetUp:
     def __init__(self, client):
@@ -221,6 +220,45 @@ class FirstSetUp:
         #TODO: add a function to save channels of each guild to respective db and add table channels to guild
         pass
 
+
+class MusicPlayer():
+    def __init__(self):
+        self.library = {i:v for i,v in enumerate(os.listdir("../data/mp3s"))}
+        self.current_track = None
+        self.playlist
+        self.is_playing = False
+        self.client_list = False
+    
+    def change_track(self,track_number):
+        return self.library[track_number]
+    
+    #start the musicplayer connections
+    async def start_music_player_connections(self, client):
+        vc_client_list = []
+        #connect to music channel
+        general_voice_channels = collect_general_voice_channels(client)
+        for guild,gc_channel in general_voice_channels.items(): 
+            vc = await client.get_channel(gc_channel).connect()
+            vc_client_list.append(vc)
+        
+        self.client_list = vc_client_list
+    
+    #close musicplayer connections
+    async def close_vc_connections(self, client):
+        for vc in client.voice_clients:
+            print(vc)
+            await vc.disconnect()
+        self.is_playing = False
+
+    async def play_song(self, song, vc):
+        vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', print(type(x))))
+        self.is_playing = True
+
+
+
+
+
+
 #collect general chat room for all guilds
 def collect_general_chat_all_guilds(client):
     guild_dict = {guild:0 for guild in client.guilds}
@@ -241,23 +279,6 @@ def collect_general_voice_channels(client):
                 print(type(channel))
     
     return guild_dict
-
-#start the musicplayer connections
-async def start_music_player_connections(client):
-    vc_client_list = []
-    #connect to music channel
-    general_voice_channels = collect_general_voice_channels(client)
-    for guild,gc_channel in general_voice_channels.items(): 
-        vc = await client.get_channel(gc_channel).connect()
-        vc_client_list.append(vc)
-    
-    return vc_client_list
-
-#close musicplayer connections
-async def close_vc_connections(client):
-    for vc in client.voice_clients:
-        print(vc)
-        await vc.disconnect()
 
 #Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):

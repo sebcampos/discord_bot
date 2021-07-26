@@ -1,7 +1,6 @@
 #!/home/linuxbrew/.linuxbrew/bin/python3
 
 #happybot v2
-
 #import depenedancies
 import discord
 from discord.ext import tasks
@@ -17,6 +16,12 @@ client = discord.Client(intents=intents)
 GUILD_NAME = "PTCB Study Group 💊💉"
 
 
+#MusicPlayer
+mp = MusicPlayer()
+mp.start_music_player_connections()
+for channel in mp.client_list:
+    mp.play_song(random.choice(mp.library.values()), channel)
+
 
 #Using the on_ready() event handler to begin tasks
 @client.event
@@ -29,7 +34,6 @@ async def on_ready():
     # new_user_of_the_week.start(guild_dict_gc)
     musicplayer.start(vc_client_list)
     
-
 
 #when DM'd happybot logs the suggestion
 @client.event
@@ -130,29 +134,13 @@ async def goodmorning(guild_dict_gc):
 
 #music player
 @tasks.loop(seconds=30)
-async def musicplayer(vc_client_list, songs = False):
-    if songs == False:
-        for music_file in os.listdir("../data/mp3s"):
-            for vc in vc_client_list:
-                if vc.is_playing() != True:
-                    print("begining to play")
-                    print(f"\n\n{type(vc)}\n\n")
-                    vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
-                else:
-                    #print(f"{vc} is Playing")
-                    continue
-    elif songs != True:
-        print("condition met")
-        lst = [songs] + os.listdir("../data/mp3s")
-        for music_file in lst:
-            for vc in vc_client_list:
-                if vc.is_playing() != True:
-                    print("begining to play")
-                    print(f"\n\n{type(vc)}\n\n")
-                    vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{music_file}'), after=lambda x: print('done', x))
-                else:
-                    #print(f"{vc} is Playing")
-                    continue
+async def musicplayer():
+    global mp
+    if mp.is_playing != True:
+        return "Nothing playing"
+    elif mp.is_playing != False:
+        print(mp.library)
+
 
 
                 

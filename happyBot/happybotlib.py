@@ -277,10 +277,9 @@ class MusicPlayer():
         self.client_list = None
 
     async def play_song(self, song, vc, discord):
-        asyncio.sleep(5)
+        self.is_playing = True
+        self.currently_playing[vc.guild] = song
         await vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{song}'), after=lambda x: print('done', print(type(x))))
-        await self.is_playing = True
-        await self.currently_playing[vc.guild] = song
 
 
 

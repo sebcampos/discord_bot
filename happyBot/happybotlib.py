@@ -15,6 +15,7 @@ import bs4
 import time
 from youtube_dl import YoutubeDL
 from moviepy.editor import *
+import asyncio
 
 
 #collect general chat room for all guilds
@@ -247,7 +248,7 @@ class MusicPlayer():
         self.library = {i:v for i,v in enumerate(os.listdir("../data/mp3s"))}
         self.playlist = None
         self.is_playing = False
-        self.currently_playing
+        self.currently_playing = {}
         self.client_list = False
     
     def change_track(self,track_number):
@@ -276,6 +277,7 @@ class MusicPlayer():
         self.client_list = None
 
     async def play_song(self, song, vc, discord):
+        asyncio.sleep(5)
         await vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{song}'), after=lambda x: print('done', print(type(x))))
         self.is_playing = True
         self.currently_playing[vc.guild] = song

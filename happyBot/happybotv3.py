@@ -27,9 +27,9 @@ async def on_ready():
         print(f"{vc} is starting")
         song = random.choice(list(mp.library.values()))
         try:
-            await mp.play_song(song, vc, discord)
+            #await mp.play_song(song, vc, discord)
         except:
-            print("hekin")
+            print("connections still loading")
     #tasks
     # scrape_web.start()
     # goodmorning.start(guild_dict_gc)

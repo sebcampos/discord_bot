@@ -19,7 +19,6 @@ GUILD_NAME = "PTCB Study Group 💊💉"
 #MusicPlayer
 mp = MusicPlayer()
 mp.start_music_player_connections(client)
-print(mp.client_list)
 for channel in mp.client_list:
     mp.play_song(random.choice(mp.library.values()), channel)
 

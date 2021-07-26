@@ -234,6 +234,7 @@ class MusicPlayer():
     
     #start the musicplayer connections
     async def start_music_player_connections(self, client):
+        print("begun")
         vc_client_list = []
         #connect to music channel
         general_voice_channels = collect_general_voice_channels(client)
@@ -242,7 +243,6 @@ class MusicPlayer():
             vc_client_list.append(vc)
         
         print(vc_client_list)
-        input("test")
         self.client_list = vc_client_list
     
     #close musicplayer connections

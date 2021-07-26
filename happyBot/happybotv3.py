@@ -27,7 +27,7 @@ async def on_ready():
         print(f"{vc} is starting")
         song = random.choice(list(mp.library.values()))
         try:
-            #await mp.play_song(song, vc, discord)
+            await mp.play_song(song, vc, discord)
         except:
             print("connections still loading")
     #tasks

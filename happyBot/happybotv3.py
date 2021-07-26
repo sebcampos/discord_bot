@@ -24,7 +24,7 @@ async def on_ready():
     global mp
     await mp.start_music_player_connections(client)
     for vc in mp.client_list:
-        await mp.play_song(random.choice(list(mp.library.values())), vc)
+        await mp.play_song(random.choice(list(mp.library.values())), vc, discord)
     #tasks
     # scrape_web.start()
     # goodmorning.start(guild_dict_gc)

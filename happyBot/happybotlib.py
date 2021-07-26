@@ -19,7 +19,8 @@ import asyncio
 
 
 #collect general chat room for all guilds
-def collect_general_chat_all_guilds(client):
+def collect_general_chat_all_guilds():
+    global client
     guild_dict = {guild:0 for guild in client.guilds}
     for guild in guild_dict:
         for channel in guild.channels:
@@ -28,7 +29,8 @@ def collect_general_chat_all_guilds(client):
     return guild_dict
 
 #collect all general voice chat channels
-def collect_general_voice_channels(client):
+def collect_general_voice_channels():
+    global client
     guild_dict = {guild:0 for guild in client.guilds}
     for guild in client.guilds:
         for channel in guild.channels:
@@ -255,11 +257,12 @@ class MusicPlayer():
         return self.library[track_number]
     
     #start the musicplayer connections
-    async def start_music_player_connections(self, client):
+    async def start_music_player_connections(self):
+        global client
         print("begun")
         vc_client_list = []
         #connect to music channel
-        general_voice_channels = collect_general_voice_channels(client)
+        general_voice_channels = collect_general_voice_channels()
         for guild,gc_channel in general_voice_channels.items(): 
             vc = await client.get_channel(gc_channel).connect()
             vc_client_list.append(vc)
@@ -268,7 +271,8 @@ class MusicPlayer():
         self.client_list = vc_client_list
     
     #close musicplayer connections
-    async def close_vc_connections(self, client):
+    async def close_vc_connections(self):
+        global client
         for vc in client.voice_clients:
             print(vc)
             await vc.disconnect()

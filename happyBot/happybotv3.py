@@ -25,7 +25,7 @@ async def on_ready():
     await mp.start_music_player_connections(client)
     for vc in mp.client_list:
         print(f"{vc} is starting")
-        song = random.choice(list(mp.library.values())
+        song = random.choice(list(mp.library.values()))
         await mp.play_song(song, vc, discord)
     #tasks
     # scrape_web.start()
@@ -135,8 +135,6 @@ async def goodmorning(guild_dict_gc):
 @tasks.loop(seconds=30)
 async def musicplayer():
     global mp
-    print(mp.is_playing)
-    print("starting")
     if mp.is_playing != True:
         return "Nothing playing"
     elif mp.is_playing != False:

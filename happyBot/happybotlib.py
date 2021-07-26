@@ -17,6 +17,27 @@ from youtube_dl import YoutubeDL
 from moviepy.editor import *
 
 
+#collect general chat room for all guilds
+def collect_general_chat_all_guilds(client):
+    guild_dict = {guild:0 for guild in client.guilds}
+    for guild in guild_dict:
+        for channel in guild.channels:
+            if "general" in channel.name:
+                guild_dict[guild] += channel.id
+    return guild_dict
+
+#collect all general voice chat channels
+def collect_general_voice_channels(client):
+    guild_dict = {guild:0 for guild in client.guilds}
+    for guild in client.guilds:
+        for channel in guild.channels:
+            if str(channel.type) == "voice" and "general" in channel.name.lower():
+                guild_dict[guild] += channel.id
+                print(channel)
+                print(type(channel))
+    
+    return guild_dict
+
 class DataBase:
     #build database
     def __init__(self, db_name=False):
@@ -224,9 +245,9 @@ class FirstSetUp:
 class MusicPlayer():
     def __init__(self):
         self.library = {i:v for i,v in enumerate(os.listdir("../data/mp3s"))}
-        self.current_track = None
         self.playlist = None
         self.is_playing = False
+        self.currently_playing
         self.client_list = False
     
     def change_track(self,track_number):
@@ -255,35 +276,11 @@ class MusicPlayer():
         self.client_list = None
 
     async def play_song(self, song, vc, discord):
-        print(song, vc)
         await vc.play(discord.FFmpegPCMAudio(f'/home/discord_admin/discord_bot/data/mp3s/{song}'), after=lambda x: print('done', print(type(x))))
         self.is_playing = True
+        self.currently_playing[vc.guild] = song
 
 
-
-
-
-
-#collect general chat room for all guilds
-def collect_general_chat_all_guilds(client):
-    guild_dict = {guild:0 for guild in client.guilds}
-    for guild in guild_dict:
-        for channel in guild.channels:
-            if "general" in channel.name:
-                guild_dict[guild] += channel.id
-    return guild_dict
-
-#collect all general voice chat channels
-def collect_general_voice_channels(client):
-    guild_dict = {guild:0 for guild in client.guilds}
-    for guild in client.guilds:
-        for channel in guild.channels:
-            if str(channel.type) == "voice" and "general" in channel.name.lower():
-                guild_dict[guild] += channel.id
-                print(channel)
-                print(type(channel))
-    
-    return guild_dict
 
 #Builds a sqlite3 database for the new guild along with a table for users
 def new_happy_bot_guild_users(guild):

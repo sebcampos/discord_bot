@@ -225,7 +225,7 @@ class MusicPlayer():
     def __init__(self):
         self.library = {i:v for i,v in enumerate(os.listdir("../data/mp3s"))}
         self.current_track = None
-        self.playlist
+        self.playlist = None
         self.is_playing = False
         self.client_list = False
     

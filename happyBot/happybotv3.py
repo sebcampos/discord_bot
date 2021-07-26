@@ -32,7 +32,7 @@ async def on_ready():
     # scrape_web.start()
     # goodmorning.start(guild_dict_gc)
     # new_user_of_the_week.start(guild_dict_gc)
-    musicplayer.start(vc_client_list)
+    musicplayer.start()
     
 
 #when DM'd happybot logs the suggestion
